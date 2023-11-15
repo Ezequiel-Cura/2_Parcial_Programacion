@@ -3,14 +3,19 @@ import pygame as py
 class Config:
     def __init__(self, size, FPS, caption = "Title", icon = ""):
         self.running = True
+        #fondos
+        self.list_fondos = []
+        self.fondo = None
+        
         self.size = size
         self.SCREEN = py.display.set_mode(self.size)
         self.FPS = FPS
         self.clock = py.time.Clock()
 
-
+        if icon != "":
+            self.set_icon(icon)
         self.set_caption(caption)
-        self.set_icon(icon)
+        
 
 
     def set_caption(self, caption):
@@ -37,15 +42,21 @@ class Config:
     def stop_music(self):
         self.music.stop()
 
-    def set_background_image(self, background):
-        self.background_image = py.image.load(background)
-        self.background_image = py.transform.scale(self.background_image, self.size)
+    def set_background_image(self, background, list_bg = False):
+        if list_bg == True:
+            for img in background:
+                img_cargada = py.image.load(img)
+                img_rescalada = py.transform.scale(img_cargada, self.size)
+                self.list_fondos.append(img_rescalada)
+        else:
+            self.background_image = py.image.load(background)
+            self.background_image = py.transform.scale(self.background_image, self.size)
 
     def set_fuente(self):
         pass
 
     def fill_screen(self, color=None):
         if color != None:
-            self.screen.fill(color)
+            self.SCREEN.fill(color)
         else:
-            self.screen.blit(self.background_image, (0, 0))
+            self.SCREEN.fill((0, 0,0))

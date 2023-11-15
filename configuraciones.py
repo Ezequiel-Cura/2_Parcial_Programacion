@@ -1,29 +1,35 @@
 import pygame
 
 
-def reescalalar_imagenes(diccionario_animaciones, ancho, alto):
-    for clave in diccionario_animaciones:
-        for i in range(len(diccionario_animaciones[clave])):
-            img = diccionario_animaciones[clave][i]
-            diccionario_animaciones[clave][i] = pygame.transform.scale(img, (ancho, alto))
-
-def rotar_imagen(imagenes:list):
-    lista_imagenes = []
-    for i in range(len(imagenes)):
-        imagen_rotada = pygame.transform.flip(imagenes[i],True,False)
-        lista_imagenes.append(imagen_rotada)
-    
-    return lista_imagenes
-
-
 # Imagenes personaje principal----------------------------------------------------
 
-dicc_animaciones = {}
+# 0 = Idle_der, 1 = Idle_izq, 2 = Run_der, 3 = Run_izq, 4 = Jump_der, 5 = Jump_izq
+list_animaciones_personaje = []
 
-# personaje_idle = [pygame.image.load("/Assets/Images/Personajes/Idle/")]
+personaje_idle = [       
+    pygame.image.load(r"Assets\Images\Personaje\Idle\0.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\1.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\2.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\3.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\4.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\5.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\6.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\7.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\8.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\9.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\10.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\11.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\12.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\13.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Idle\14.png"),
+]
 personaje_run = []
 personaje_salta = []
 
+
+list_animaciones_personaje.append(personaje_idle)
+list_animaciones_personaje.append(personaje_run)
+list_animaciones_personaje.append(personaje_salta)
 
 # Imagenes enemigos ---------------------------------------------------------------
 
@@ -54,5 +60,6 @@ bg_demon_forest = [
 
 #lvl 2
 bg_cave = []
+
 
 #lvl 3

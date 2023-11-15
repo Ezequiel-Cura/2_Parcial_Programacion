@@ -1,11 +1,13 @@
 import pygame as py
 from Classes.config_game import Config
 from configuraciones import *
+from Classes.Niveles.Nivel_1 import Nivel_1
+
 
 class Game(Config):
     def __init__(self, size, FPS, caption = "Title", icon = ""):
         super().__init__(size, FPS, caption, icon)
-        
+        self.nivel_1 = Nivel_1(self.SCREEN)
 
     def init(self):
         py.init()
@@ -20,11 +22,9 @@ class Game(Config):
                     self.running = False
 
             self.fill_screen()
+            
+            self.nivel_1.update(lista_eventos)
 
-            for bg in bg_demon_forest:
-                bg = pygame.transform.scale(bg, (self.size))
-                self.SCREEN.blit(bg,(0,0))
-       
             py.display.update()
         
         py.quit()

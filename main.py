@@ -1,6 +1,6 @@
 from Classes.game import Game
 import ctypes
-import math
+
 
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()

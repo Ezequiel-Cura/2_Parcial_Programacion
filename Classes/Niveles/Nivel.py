@@ -11,6 +11,7 @@ class Nivel():
 
         self.jugador:PersonajePrincipal = personaje_principal
         self.plataformas = lista_plataformas
+        
         self.lista_enemigos:list[Enemigo] = self.generar_enemigo_aleatorio()
         self.lista_trampas = []
 
@@ -26,7 +27,7 @@ class Nivel():
     def set_tiempo(self, pantalla):
         pass
 
-    def set_vias(self, pantalla):
+    def set_vidas(self, pantalla):
         pass
 
     def verificar_game_over(self):
@@ -51,31 +52,35 @@ class Nivel():
         for plataforma in self.plataformas:
             plataforma.draw(self._slave)
 
-        # self.jugador.update(self._slave, self.plataformas)
+        self.jugador.update(self._slave, self.plataformas)
+        self.jugador.animar_movimiento(self._slave)
 
-    # ACTUALIZAR QUE HACE EL PERSONAJE PRINCIPAL
+    # ACTUALIZAR QUE HACE EL PERSONAJE PRINCIPAL CON LAS TECLAS
     def leer_inputs(self):
         teclas = pygame.key.get_pressed()
+        # 0 = Idle_der, 1 = Run_der, 2 = Jump_der, 3 = attack_der
+        #   = Idle_izq,-1 = Run_izq, -2 = Jump_izq, -3 attack_izq
+        if teclas[pygame.K_a]:
+            self.jugador.mirando_izq = True
+            self.jugador.que_hace = 1
+        elif teclas[pygame.K_d]:
+            self.jugador.mirando_izq = False
+            self.jugador.que_hace = 1
+        else:
+            self.jugador.que_hace = 0
 
-        # if teclas[py.K_a]:
-        #     self.jugador.que_hace = 2
-        # elif teclas[py.K_d]:
-        #     self.jugador.que_hace = 1
-        # else:
-        #     self.jugador.que_hace = 0
-
-        # if teclas[py.K_w]:
-        #     self.jugador.que_hace = 3
-        #     self.jugador.press_tecla_w = True
+        if teclas[pygame.K_w]:
+            self.jugador.que_hace = 2
+            self.jugador.press_tecla_w = True
     
     def dibujar_rectangulos(self):
         if obtener_modo() == True:  
             pass
-            # for lado in self.jugador.lados:
-            #     pygame.draw.rect(self._slave,"Orange", self.jugador.lados[lado],2)
+            for rect in self.jugador.rectangulos:
+                pygame.draw.rect(self._slave,"Orange", self.jugador.rectangulos[rect],2)
 
-            # for plataforma in self.plataformas:
-            #     pygame.draw.rect(self._slave,...)
+            for plataforma in self.plataformas:
+                pygame.draw.rect(self._slave, "red", plataforma)
             
             # for ene_lado in self.enemigos:
             #     pygame.draw.rect

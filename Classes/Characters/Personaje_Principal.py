@@ -5,9 +5,11 @@ class PersonajePrincipal(Personaje):
         velocidad = 5
         potencia_salto = 25
         self.score = 0
-        animaciones_res = Personaje.reescalar_imagenes(animaciones, tamaño[0], tamaño[1])
 
-        super().__init__(velocidad, potencia_salto, tamaño, posicion, animaciones_res)
+        # animaciones_res = Personaje.reescalar_imagenes(animaciones, tamaño[0], tamaño[1])
+
+        self.list_proyectiles  = [] 
+        super().__init__(velocidad, potencia_salto, tamaño, posicion, animaciones)
 
 
     def verificar_colision_enemigo(self, lista_enemigos):

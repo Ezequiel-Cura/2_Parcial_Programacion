@@ -53,17 +53,59 @@ personaje_salta = [
     pygame.image.load(r"Assets\Images\Personaje\Jump\12.png"),
     pygame.image.load(r"Assets\Images\Personaje\Jump\13.png"),
 ]
+personaje_ataque = [
+    pygame.image.load(r"Assets\Images\Personaje\Attack\0.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\1.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\2.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\3.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\4.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\5.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\6.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\7.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\8.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\9.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\10.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\11.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\12.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\13.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\14.png"),
+    pygame.image.load(r"Assets\Images\Personaje\Attack\15.png"),
+
+]
 
 
 list_animaciones_personaje.append(personaje_idle)
 list_animaciones_personaje.append(personaje_run)
 list_animaciones_personaje.append(personaje_salta)
+list_animaciones_personaje.append(personaje_ataque)
 
 # Imagenes enemigos ---------------------------------------------------------------
 
 #goblin
-goblin_move = []
-goblin_attack = []
+goblin_animations = []
+goblin_move = [
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\6.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\7.png"),
+]
+goblin_attack = [
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\6.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\7.png"),
+]
+
+goblin_animations.append(goblin_move)
+goblin_animations.append(goblin_attack)
 
 #Skeleton
 skeleton_move = []

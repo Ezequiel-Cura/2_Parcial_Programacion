@@ -27,10 +27,16 @@ class Nivel_1(Nivel):
         #PLATAFORMAS
         piso = Plataforma((W, 100),(0, H * 0.9), False)
 
+        plat1 = Plataforma((200, 50),(W * 0.5, H * 0.7), False)
+        plat2 = Plataforma((200, 50),(W * 0.7, H * 0.6), False)
+        plat3 = Plataforma((300, 50),(100, 200), False)
+        plat4 = Plataforma((300, 50),(500, 400), False)
+        plat5 = Plataforma((200, 50),(W * 0.1, H * 0.5), False)
 
-        lista_plataformas = [piso]
+        plat6 = Plataforma((100, 200),(200, H * 0.8), False)
+        lista_plataformas = [piso, plat1, plat2, plat3, plat4, plat5, plat6]
 
 
 
-        # ABAJO DE TODO INICIAMOS EL SUPER YA CON TODO LO NECESARIO PARA INICIARLO
+        # INICIAMOS EL SUPER YA CON TODO LO NECESARIO PARA INICIARLO
         super().__init__(pantalla, mi_personaje, lista_plataformas, self.fondo)

@@ -2,7 +2,7 @@ import pygame as py
 from Classes.config_game import Config
 from configuraciones import *
 from Classes.Niveles.Nivel_1 import Nivel_1
-
+from DEBUG import *
 
 class Game(Config):
     def __init__(self, size, FPS, caption = "Title", icon = ""):
@@ -20,6 +20,8 @@ class Game(Config):
             for event in lista_eventos:
                 if event.type == py.QUIT:
                     self.running = False
+                if event.type == py.K_m:
+                    cambiar_modo()
 
             self.fill_screen()
             

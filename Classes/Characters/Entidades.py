@@ -6,7 +6,8 @@ class Entidades_Juego:
         
         self.que_hace = 0
         self.pasos_animacion = 0
-        self.list_animaciones:list = list_animaciones
+        self.animaciones:list = list_animaciones
+        self.list_animaciones:list = Entidades_Juego.reescalar_imagenes(self.animaciones, tamaño[0], tamaño[1])
         self.animacion_actual:list[pygame.Surface] = self.list_animaciones[0]
 
         self.rect:pygame.Rect = self.animacion_actual[0].get_rect()
@@ -26,16 +27,13 @@ class Entidades_Juego:
             nueva_velocidad *= -1
         new_x = self.rectangulos["principal"].x + nueva_velocidad 
         if new_x >= 0 and new_x <= pantalla.get_width() - self.rectangulos["principal"].width:
-             for lado in self.rectangulos:
+            for lado in self.rectangulos:
                 self.rectangulos[lado].x += nueva_velocidad
 
 
     def update(self, PANTALLA,plataformas):
         # 0 = Idle_der, 1 = Run_der, 2 = Jump_der, 3 = attack_der
         #   = Idle_izq,-1 = Run_izq, -2 = Jump_izq, -3 attack_izq
-
-        if self.que_hace == 1:
-            self.mover(PANTALLA)
 
         if self.que_hace == 1:
             self.mover(PANTALLA)
@@ -51,13 +49,14 @@ class Entidades_Juego:
 
 
     def animar_movimiento(self, pantalla):
-        for recta in self.rectangulos:
-            pygame.draw.rect(pantalla,"black",self.rectangulos[recta],3)
+
+
         self.animacion_actual = self.list_animaciones[self.que_hace]
+
         if self.pasos_animacion >= len(self.animacion_actual):
             self.pasos_animacion = 0
 
-        # if self.que_hace == -1 or self.que_hace == -2 or self.que_hace == -3:
+
         if self.mirando_izq == True:
             # nueva_lista = Entidades_Juego.rotar_imagen(self.animacion_actual[int(self.pasos_animacion)])
             pantalla.blit( pygame.transform.flip(self.animacion_actual[int(self.pasos_animacion)],True,False), (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))

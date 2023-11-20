@@ -12,6 +12,8 @@ class Game(Config):
     def init(self):
         py.init()
 
+        
+
         while self.running:
             
             self.clock.tick(self.FPS) 
@@ -22,11 +24,14 @@ class Game(Config):
                     self.running = False
                 if event.type == py.K_m:
                     cambiar_modo()
+                
 
             self.fill_screen()
             
-            self.nivel_1.update(lista_eventos)
+            res = self.nivel_1.update(lista_eventos)
 
+            if res == False:
+                self.running = False
             py.display.update()
         
         py.quit()

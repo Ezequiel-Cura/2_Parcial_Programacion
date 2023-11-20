@@ -79,6 +79,13 @@ list_animaciones_personaje.append(personaje_run)
 list_animaciones_personaje.append(personaje_salta)
 list_animaciones_personaje.append(personaje_ataque)
 
+# Proyectil
+
+proyectil_animation = [
+    pygame.image.load(r"Assets\Images\Bullet\02.png")
+]
+
+
 # Imagenes enemigos ---------------------------------------------------------------
 
 #goblin

@@ -5,7 +5,8 @@ class PersonajePrincipal(Personaje):
         velocidad = 5
         potencia_salto = 25
         self.score = 0
-
+        
+        self.esta_saltando = False
         # animaciones_res = Personaje.reescalar_imagenes(animaciones, tamaño[0], tamaño[1])
 
         self.list_proyectiles  = [] 

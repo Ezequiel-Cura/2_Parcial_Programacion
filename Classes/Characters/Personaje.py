@@ -16,7 +16,7 @@ class Personaje(Entidades_Juego):
         self.mirando_izq = False
 
         #GRAVEDAD
-        self.esta_saltando = True # esta saltando o esta en el aire
+        self.esta_aire = True # esta saltando o esta en el aire
         self.gravedad = 1
         self.potencia_salto = -25
         self.limite_velocidad_salto = 25
@@ -26,7 +26,7 @@ class Personaje(Entidades_Juego):
 
 
     def aplicar_gravedad(self):
-        if self.esta_saltando:
+        if self.esta_aire:
             for rect in self.rectangulos:
                 self.rectangulos[rect].y += self.velocidad_y
 
@@ -36,43 +36,46 @@ class Personaje(Entidades_Juego):
 
     def verificar_colision_piso(self, lista_pisos):
         for plat in lista_pisos:
-            # print(plat["rectangulo"])w
+
             plataforma:pygame.Rect = plat
             if self.rectangulos["bottom"].colliderect(plataforma.rectangulos["top"]):
                 self.velocidad_y = 0
-                self.esta_saltando = False
+                self.esta_aire = False
                 for lado in self.rectangulos:
                     self.rectangulos[lado].bottom = plataforma.rectangulos["top"].top
                     if lado == "top":
                         self.rectangulos[lado].top = self.rectangulos["principal"].top
                 # print("COLISION")
                 break
-
             elif self.rectangulos["top"].colliderect(plat.rectangulos["bottom"]):
+                self.velocidad_y = 25
                 for lado in self.rectangulos:
                     self.rectangulos[lado].top = plataforma.rectangulos["bottom"].bottom
                     if lado == "bottom":
                         self.rectangulos[lado].top = self.rectangulos["principal"].bottom
-                self.velocidad_y = 25
-                break
-
-            elif self.rectangulos["right"].colliderect(plat.rectangulos["left"]):
-
-                for lado in self.rectangulos:
-                    self.rectangulos[lado].right = plat.rectangulos["left"].left
-                    if lado == "left" or lado == "top":
-                        self.rectangulos[lado].left = self.rectangulos["principal"].left
-                break
-            elif self.rectangulos["left"].colliderect(plat.rectangulos["right"]):
-                for lado in self.rectangulos:
-                    self.rectangulos[lado].left = plat.rectangulos["right"].right
-                    if lado == "right":
-                        self.rectangulos[lado].left = self.rectangulos["principal"].right
                 break
             else:
                 # print("MAL")
-                self.esta_saltando = True
+                self.esta_aire = True
+
     
+    def verificar_colision_pared(self, lista_plataformas):
+        for plat in lista_plataformas:
+            plataforma:pygame.Rect = plat
+            if self.rectangulos["right"].colliderect(plataforma.rectangulos["left"]):
+
+                for lado in self.rectangulos:
+                    self.rectangulos[lado].right = plataforma.rectangulos["left"].left
+                    if lado == "left" or lado == "top":
+                        self.rectangulos[lado].left = self.rectangulos["principal"].left
+                break
+            elif self.rectangulos["left"].colliderect(plataforma.rectangulos["right"]):
+                for lado in self.rectangulos:
+                    self.rectangulos[lado].left = plataforma.rectangulos["right"].right
+                    if lado == "right":
+                        self.rectangulos[lado].left = self.rectangulos["principal"].right
+                break
+
 
     def saltar(self, plataformas):
         self.velocidad_y = self.potencia_salto

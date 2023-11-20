@@ -15,6 +15,9 @@ class Entidades_Juego:
         self.rect.y = posicion[1]
         self.rectangulos: dict[str, pygame.Rect] = Entidades_Juego.obtener_rectangulos(self.rect, self.rect.width, self.rect.height)
         
+        self.attack_delay = True
+        self.jump_delay = True
+        self.shoot_delay = True
 
     
     def draw(self, pantalla):
@@ -31,20 +34,25 @@ class Entidades_Juego:
                 self.rectangulos[lado].x += nueva_velocidad
 
 
-    def update(self, PANTALLA,plataformas):
+    def update(self, PANTALLA,plataformas, lista_enemigos):
         # 0 = Idle_der, 1 = Run_der, 2 = Jump_der, 3 = attack_der
         #   = Idle_izq,-1 = Run_izq, -2 = Jump_izq, -3 attack_izq
 
         if self.que_hace == 1:
             self.mover(PANTALLA)
+
+        if self.que_hace == 3:
+            self.attack(PANTALLA, lista_enemigos)
         
         if self.que_hace == 2:
-            if not self.esta_saltando:
+
+            if not self.esta_aire:
                 self.press_tecla_w = False
                 self.saltar(plataformas)
 
         self.aplicar_gravedad()
         self.verificar_colision_piso(plataformas)
+        self.verificar_colision_pared(plataformas)
   
 
 

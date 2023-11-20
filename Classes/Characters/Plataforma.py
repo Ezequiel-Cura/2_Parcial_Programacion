@@ -7,6 +7,7 @@ class Plataforma(Entidades_Juego):
         self.plataforma = Plataforma.crear_plataforma(es_visible, False, tamaño, posicion)
         self.rectangulos = Entidades_Juego.obtener_rectangulos(self.plataforma["rectangulo"], self.plataforma["rectangulo"].width, self.plataforma["rectangulo"].height)
         # super().__init__(tamaño, posicion,[])
+        self.rects_limites = self.crear_limites_plataformas()
 
     @staticmethod
     def crear_plataforma(visible,esPremio, tamaño,posicion, path=""):
@@ -22,3 +23,21 @@ class Plataforma(Entidades_Juego):
         plataforma["premio"] = esPremio
         
         return plataforma
+    
+    def crear_limites_plataformas(self):
+
+        rect_izq = pygame.Rect(self.rectangulos["principal"].topleft[0], 
+                               self.rectangulos["principal"].topleft[1] - 10,
+                                10,
+                                10
+                               )
+        rect_der = pygame.Rect(self.rectangulos["principal"].topright[0] - 10, 
+                               self.rectangulos["principal"].topright[1] - 10,
+                                10,
+                                10
+                               )
+        dicc_rects = {
+            "rect_izq": rect_izq,
+            "rect_der": rect_der
+        }
+        return dicc_rects

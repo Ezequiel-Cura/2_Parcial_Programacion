@@ -25,13 +25,14 @@ class Nivel():
         pygame.font.init()
         self.fuente = pygame.font.SysFont("Arial",30)
 
+
         self.time_over = False
         self.vidas = 3
         self._tiempo = 60
         self.vidas_texto = self.fuente.render(f"{self.vidas}", False, "black", None)
         self.tiempo_texto = f"{self._tiempo}"
 
-       
+        # self.set_tiempo(self._slave)
     
 
     def generar_enemigo_aleatorio(self, nivel:int):
@@ -52,7 +53,7 @@ class Nivel():
         surface = pygame.Surface((100, 50))
         ticks = round(pygame.time.get_ticks())
    
-
+        pygame.time.set_timer(pygame.USEREVENT + 3, 1000,1)
         # self._slave.blit(ticks, (1000, 0))
 
     def set_vidas(self, pantalla):
@@ -64,7 +65,7 @@ class Nivel():
 
     # SE FIJA QUE TECLAS APRETAMOS 
     def update(self, lista_eventos ):
-        pygame.time.set_timer(pygame.USEREVENT + 3, 1000,1)
+        
         
         
         for evento in lista_eventos:
@@ -79,7 +80,7 @@ class Nivel():
                 self.jugador.shoot_delay = True
             elif evento.type == pygame.USEREVENT + 3:
                 self.time_over = True
-                return False
+                
             
 
         
@@ -150,7 +151,7 @@ class Nivel():
 
             self.lista_bullets.append(nuevo_proyectil)
 
-        if teclas[pygame.K_w] and self.jugador.jump_delay and not (self.jugador.esta_saltando):
+        if teclas[pygame.K_w] and self.jugador.jump_delay :
             self.jugador.esta_saltando = True
             self.jugador.jump_delay = False
             pygame.time.set_timer(pygame.USEREVENT + 1, 100,1)
@@ -167,7 +168,6 @@ class Nivel():
             # if self.jugador.ataco:
             #     pygame.draw.rect(self._slave,"red" ,self.jugador.rect_attack, 2)
             
-
             for plataforma in self.plataformas:
                 for lado in plataforma.rectangulos:
                     pygame.draw.rect(self._slave,"blue", plataforma.rectangulos[lado],2)
@@ -176,7 +176,6 @@ class Nivel():
                 for lado in plataforma.rects_limites:
                     pygame.draw.rect(self._slave,"white", plataforma.rects_limites[lado],2)
 
-            pygame.draw.rect(self._slave, "yellow", self.jugador.rectangulos["left"])
             for enemi in self.lista_enemigos:
                 for lados in enemi.rectangulos:
                     pygame.draw.rect(self._slave,"red", enemi.rectangulos[lados],2)

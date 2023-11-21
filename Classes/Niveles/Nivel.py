@@ -144,10 +144,13 @@ class Nivel():
             pygame.time.set_timer(pygame.USEREVENT + 2, 500,1)
 
             self.jugador.shoot_delay = False
+            x = self.jugador.rectangulos["principal"].midtop[0] - 5
+            y = self.jugador.rectangulos["principal"].midtop[1] + 5
+            
             if self.jugador.mirando_izq:
-                nuevo_proyectil = Proyectiles((30,40), self.jugador.rectangulos["principal"].midtop,  -1)
+                nuevo_proyectil = Proyectiles((30,40), (x,y),  -1)
             else:
-                nuevo_proyectil = Proyectiles((30,40), self.jugador.rectangulos["principal"].midtop,  1)
+                nuevo_proyectil = Proyectiles((30,40), (x, y),  1)
 
             self.lista_bullets.append(nuevo_proyectil)
 

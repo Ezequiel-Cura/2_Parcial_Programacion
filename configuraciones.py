@@ -81,9 +81,19 @@ list_animaciones_personaje.append(personaje_ataque)
 
 # Proyectil
 
+
 proyectil_animation = [
     pygame.image.load(r"Assets\Images\Bullet\02.png")
 ]
+
+# proyectil_animation = [
+#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt1.png"),
+#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt2.png"),
+#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt3.png"),
+#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt4.png"),
+# ]
+
+
 
 
 # Imagenes enemigos ---------------------------------------------------------------

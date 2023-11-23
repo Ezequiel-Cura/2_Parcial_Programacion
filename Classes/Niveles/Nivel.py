@@ -27,9 +27,9 @@ class Nivel():
 
 
         self.time_over = False
-        self.vidas = 3
+   
         self._tiempo = 60
-        self.vidas_texto = self.fuente.render(f"{self.vidas}", False, "black", None)
+        self.vidas_texto = self.fuente.render(f"{self.jugador.vidas}", False, "black", None)
         self.tiempo_texto = f"{self._tiempo}"
 
         # self.set_tiempo(self._slave)
@@ -57,7 +57,8 @@ class Nivel():
         # self._slave.blit(ticks, (1000, 0))
 
     def set_vidas(self, pantalla):
-        pass
+        self.vidas_texto = self.fuente.render(f"{self.jugador.vidas}", False, "black", None)
+        pantalla.blit(self.vidas_texto,(700, 0))
 
     def verificar_game_over(self):
         pass
@@ -90,13 +91,15 @@ class Nivel():
     # ACTUALIZA TODA LA PANTALLA, MOVIMIENTO DE PERSONAJE Y DEMAS
     def actualizar_pantalla(self):
         self._slave.blit(self.img_fondo, (0,0))
-        self._slave.blit(self.vidas_texto, (700, 0))
+        # self._slave.blit(self.vidas_texto, (700, 0))
         self.set_tiempo(self._slave)
+        self.set_vidas(self._slave)
 
         for plataforma in self.plataformas:
             plataforma.draw(self._slave)
 
         self.jugador.update(self._slave, self.plataformas, self.lista_enemigos)
+        self.jugador.verificar_colision_enemigo(self.lista_enemigos)
         self.jugador.animar_movimiento(self._slave)
         
        
@@ -113,7 +116,7 @@ class Nivel():
         for enem in self.lista_enemigos:
             enem.aplicar_gravedad()
             enem.verificar_colision_piso(self.plataformas)
-            enem.comportamiento(self.plataformas, self._slave)
+            enem.comportamiento(self.plataformas, self._slave, self.jugador)
             enem.animar_movimiento(self._slave)
 
         self.dibujar_rectangulos()
@@ -148,9 +151,9 @@ class Nivel():
             y = self.jugador.rectangulos["principal"].midtop[1] + 5
             
             if self.jugador.mirando_izq:
-                nuevo_proyectil = Proyectiles((30,40), (x,y),  -1)
+                nuevo_proyectil = Proyectiles((50,50), (x,y),  -1)
             else:
-                nuevo_proyectil = Proyectiles((30,40), (x, y),  1)
+                nuevo_proyectil = Proyectiles((50,50), (x, y),  1)
 
             self.lista_bullets.append(nuevo_proyectil)
 

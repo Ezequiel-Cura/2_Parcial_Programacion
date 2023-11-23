@@ -6,6 +6,7 @@ class PersonajePrincipal(Personaje):
         potencia_salto = 25
         self.score = 0
         
+        self.vidas = 3
         self.esta_saltando = False
         # animaciones_res = Personaje.reescalar_imagenes(animaciones, tamaño[0], tamaño[1])
 
@@ -14,7 +15,9 @@ class PersonajePrincipal(Personaje):
 
 
     def verificar_colision_enemigo(self, lista_enemigos):
-        pass
+        for enemigo in lista_enemigos:
+            if self.rectangulos["principal"].colliderect(enemigo.rectangulos["principal"]):
+                self.vidas -= 1
 
     def verificar_accion(self, que_hizo):
         pass

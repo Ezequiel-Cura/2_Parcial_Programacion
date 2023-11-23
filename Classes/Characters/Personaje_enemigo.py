@@ -9,7 +9,7 @@ class Enemigo(Personaje):
 
 
 
-    def comportamiento(self, plataformas:list[Plataforma], pantalla):
+    def comportamiento(self, plataformas:list[Plataforma], pantalla, jugador):
         width_rectangulo = self.rectangulos["principal"].width
         recta_proximidad = pygame.Rect(self.rectangulos["principal"].x - width_rectangulo * 3, 
                                        self.rectangulos["principal"].y,
@@ -39,13 +39,19 @@ class Enemigo(Personaje):
                     self.mirando_izq = False
 
 
-            # new_x = self.rectangulos["principal"].x + nueva_vel 
-            # if new_x >= pantalla.get_width() - self.rectangulos["principal"].width:
-            #     self.mirando_izq = True
-
-            # if new_x <= 0:
-            #     self.mirando_izq = False
-
+        if recta_proximidad.colliderect(jugador.rectangulos["principal"]):
+            
+            if jugador.rectangulos["principal"].x < self.rectangulos["principal"].x:
+                self.mirando_izq = True
+            else:
+                self.mirando_izq = False    
+            
+            if self.rectangulos["principal"].colliderect(jugador.rectangulos["principal"]):
+                self.que_hace = 1
+                jugador.vidas -= 3
+            
+        else:
+            self.que_hace = 0
 
 
 

@@ -9,8 +9,13 @@ class Proyectiles(Items):
         self.direccion = direccion
         self.velocidad = 7
 
-        self.animacion_actual = proyectil_animation
-        self.animacion_actual = [pygame.transform.scale(proyectil_animation[0], tamaño)]
+        self.pasos_animacion = 0
+        self.proyectil_animation = proyectil_animation
+        self.animacion_actual = []
+
+        for i in range(len(self.proyectil_animation)):
+            self.animacion_actual.append(pygame.transform.scale(self.proyectil_animation[i], tamaño))
+
         self.rect:pygame.Rect = self.animacion_actual[0].get_rect()
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
@@ -27,11 +32,20 @@ class Proyectiles(Items):
 
         self.rectangulos["principal"].x += new_vel
        
-        
+        self.animar_movimiento(pantalla)
 
         self.verificar_limites(lista_plataformas, new_vel, pantalla)
 
-        pantalla.blit(self.animacion_actual[0], self.rectangulos["principal"])
+        
+
+    def animar_movimiento(self, pantalla):
+        
+        if self.pasos_animacion >= len(self.animacion_actual):
+            self.pasos_animacion = 0
+
+            pantalla.blit(self.animacion_actual[self.pasos_animacion], self.rectangulos["principal"])
+        
+        self.pasos_animacion += 0.5
 
     def verificar_limites(self, lista_plataformas:list[Plataforma], new_vel, pantalla):
         new_x = self.rectangulos["principal"].x + new_vel 

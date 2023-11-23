@@ -5,6 +5,7 @@ class Entidades_Juego:
     def __init__(self,tamaño, posicion, list_animaciones):
         
         self.que_hace = 0
+        self.count = 0
         self.pasos_animacion = 0
         self.animaciones:list = list_animaciones
         self.list_animaciones:list = Entidades_Juego.reescalar_imagenes(self.animaciones, tamaño[0], tamaño[1])
@@ -57,9 +58,12 @@ class Entidades_Juego:
 
 
     def animar_movimiento(self, pantalla):
-
-
         self.animacion_actual = self.list_animaciones[self.que_hace]
+        self.count += 1
+
+        if self.count > 5:
+            self.pasos_animacion += 1
+            self.count = 0
 
         if self.pasos_animacion >= len(self.animacion_actual):
             self.pasos_animacion = 0
@@ -71,7 +75,7 @@ class Entidades_Juego:
         else:
             pantalla.blit(self.animacion_actual[int(self.pasos_animacion)], (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))
 
-        self.pasos_animacion += 0.25
+       
 
     @staticmethod
     def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):

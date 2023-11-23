@@ -73,7 +73,7 @@ class Personaje(Entidades_Juego):
                 for lado in self.rectangulos:
                     self.rectangulos[lado].left = plataforma.rectangulos["right"].right
                     if lado == "right":
-                        self.rectangulos[lado].left = self.rectangulos["principal"].right
+                        self.rectangulos[lado].right = self.rectangulos["principal"].right
                 break
 
 
@@ -86,6 +86,7 @@ class Personaje(Entidades_Juego):
             self.rect_attack = pygame.Rect(self.rectangulos["principal"].midtop[0] -self.rectangulos["principal"].width ,self.rectangulos["principal"].topleft[1], self.rectangulos["principal"].width, self.rectangulos["principal"].height)
         else:
             self.rect_attack = pygame.Rect(self.rectangulos["principal"].midtop[0],self.rectangulos["principal"].midtop[1], self.rectangulos["principal"].width, self.rectangulos["principal"].height)
+
 
         for ene in lista_objetivo:
             if self.rect_attack.colliderect(ene.rectangulos["principal"]):

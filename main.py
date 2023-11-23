@@ -11,7 +11,6 @@ print(round(ancho,1), round(alto,1))
 game = Game((1900, 1000), 60, "Fantasy Adventure")
 
 
-
 game.init()
 
 

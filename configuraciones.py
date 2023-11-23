@@ -125,8 +125,55 @@ goblin_animations.append(goblin_move)
 goblin_animations.append(goblin_attack)
 
 #Skeleton
-skeleton_move = []
-skeleton_attack = []
+skeleton_move = [
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Run\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Run\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Run\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Run\3.png"),
+]
+skeleton_attack = [
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\6.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\7.png"),
+]
+
+skeleton_animation = [skeleton_move, skeleton_attack]
+
+#mini boss necromancer
+necro_walk = [
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\6.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Walk\7.png"),
+]
+
+necro_revive = [
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\6.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\7.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\8.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\9.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\10.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\11.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\12.png"),
+]
+
+necro_animation = [necro_walk, necro_revive]
+
 
 #boss chuthullu
 boss_idle = []

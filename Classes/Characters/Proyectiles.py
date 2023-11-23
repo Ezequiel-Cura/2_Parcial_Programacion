@@ -17,8 +17,8 @@ class Proyectiles(Items):
             self.animacion_actual.append(pygame.transform.scale(self.proyectil_animation[i], tamaño))
 
         self.rect:pygame.Rect = self.animacion_actual[0].get_rect()
-        self.rect.x = posicion[0]
-        self.rect.y = posicion[1]
+        self.rect.x = posicion[0] 
+        self.rect.y = posicion[1] 
         self.rectangulos: dict[str, pygame.Rect] = Entidades_Juego.obtener_rectangulos(self.rect, self.rect.width, self.rect.height)
 
         self.eliminar = False
@@ -59,7 +59,7 @@ class Proyectiles(Items):
                 self.eliminar = True
     
     def verificar_colision_enemigos(self, lista_enemigos:list):
-
+       
         for en in lista_enemigos:
             if self.rectangulos["principal"].colliderect(en.rectangulos["principal"]):
                 self.eliminar = True

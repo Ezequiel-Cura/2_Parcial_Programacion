@@ -7,7 +7,11 @@ class Enemigo(Personaje):
 
         super().__init__(velocidad, 10, (40, 60),posicion,list_animaciones)
 
-
+    def update(self, PANTALLA, plataformas, jugador):
+        self.aplicar_gravedad()
+        self.verificar_colision_piso(plataformas)
+        self.comportamiento(plataformas, PANTALLA, jugador)
+        self.animar_movimiento(PANTALLA)
 
     def comportamiento(self, plataformas:list[Plataforma], pantalla, jugador):
         width_rectangulo = self.rectangulos["principal"].width
@@ -26,8 +30,6 @@ class Enemigo(Personaje):
                     # nueva_vel *= -1
                     self.rectangulos[rect].x -= nueva_vel
                 else:
-
-                
                 # self.rectangulos["left"].x += nueva_vel
                     self.rectangulos[rect].x += nueva_vel
 
@@ -48,7 +50,7 @@ class Enemigo(Personaje):
             
             if self.rectangulos["principal"].colliderect(jugador.rectangulos["principal"]):
                 self.que_hace = 1
-                jugador.vidas -= 3
+                
             
         else:
             self.que_hace = 0

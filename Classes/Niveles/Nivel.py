@@ -6,6 +6,7 @@ from Classes.Characters.Personaje_Principal import PersonajePrincipal
 from configuraciones import *
 from Classes.Characters.Plataforma import Plataforma
 from Classes.Characters.Proyectiles import Proyectiles
+from Classes.Characters.Items import Items
 
 class Nivel():
     def __init__(self, pantalla, personaje_principal, lista_plataformas, imagen_fondo,nivel ):
@@ -49,16 +50,18 @@ class Nivel():
                 random_x = random.randint(20, self._slave.get_width() -20)
                 # random_y = random.randint(20, self._slave.get_height())
 
-                enemig = Enemigo((random_x,0), goblin_animations, 3)
+                enemig = Enemigo((random_x,0), goblin_animations, 3, (40, 60))
                 self.lista_enemigos.append(enemig)
         elif nivel == 2:
-            self.necromancer = Necromancer((self._slave.get_height() * 0.5,0),necro_animation, 5)
+            self.necromancer = Necromancer((self._slave.get_height() * 0.5,0),necro_animation, 5, (50,70))
             for i in range(5):
                 random_x = random.randint(20, self._slave.get_width() -20)
-                enemig = Enemigo((random_x,0), skeleton_animation, 3)
+                enemig = Enemigo((random_x,0), skeleton_animation, 3, (50, 70))
                 self.lista_enemigos.append(enemig)
-    def generar_recompensa_aleatoria(self):
-        pass
+
+    def generar_recompensa_aleatoria(self, lista_plataformas):
+        for plat in lista_plataformas:
+            x = plat.rectangulos["top"].topmid
 
     def set_tiempo(self, pantalla):
         surface = pygame.Surface((100, 50))
@@ -73,15 +76,18 @@ class Nivel():
         pantalla.blit(self.tiempo_texto, (1500, 0))
 
     def set_vidas(self, pantalla):
-        self.vidas_texto = self.fuente.render(f"{self.jugador.vidas}", False, "black", None)
-        pantalla.blit(self.vidas_texto,(700, 0))
+        x = 60
+        pantalla.blit(hp_surface,(30,10))
+        for i in range(self.jugador.vidas):
+            x += 20
+            pantalla.blit(heart_img,(x,10))
+
 
     def verificar_game_over(self):
         if self.jugador.vidas <= 0 or self.time_over:
             self.time_over = True
     
         
-
     # SE FIJA QUE TECLAS APRETAMOS 
     def update(self, lista_eventos ):
 
@@ -91,7 +97,6 @@ class Nivel():
         if self.inicio_juego:
             pygame.time.set_timer(pygame.USEREVENT + 3, 60000,1)
             self.inicio_juego = False
-        
         
         for evento in lista_eventos:
             if evento.type == pygame.KEYDOWN:
@@ -104,16 +109,13 @@ class Nivel():
             elif evento.type == pygame.USEREVENT + 2:
                 self.jugador.shoot_delay = True
             elif evento.type == pygame.USEREVENT + 3:
-                print(self.time_over)
                 self.time_over = True
             elif evento.type == pygame.USEREVENT + 4:
                 self.jugador.inmune = False
             elif evento.type == pygame.USEREVENT + 5:
-                self.necromancer.delay_creacion = True
+                if self.necromancer != None:
+                    self.necromancer.delay_creacion = True
                 
-            
-
-        
         self.leer_inputs()
         self.actualizar_pantalla()
         self.verificar_game_over()
@@ -149,9 +151,10 @@ class Nivel():
             bullet.verificar_colision_enemigos(self.lista_enemigos)
             bullet.update(self._slave, self.plataformas)
 
-       
+
         if self.necromancer != None:
             self.necromancer.update(self._slave, self.plataformas, self.jugador, self.lista_enemigos)
+
         for enem in self.lista_enemigos:
             enem.update(self._slave, self.plataformas, self.jugador)
 
@@ -193,13 +196,12 @@ class Nivel():
 
             self.lista_bullets.append(nuevo_proyectil)
 
-        if teclas[pygame.K_w] and self.jugador.jump_delay :
+        if teclas[pygame.K_w] and self.jugador.jump_delay:
             self.jugador.esta_saltando = True
             self.jugador.jump_delay = False
-            pygame.time.set_timer(pygame.USEREVENT + 1, 100,1)
-
             self.jugador.que_hace = 2
             self.jugador.press_tecla_w = True
+            pygame.time.set_timer(pygame.USEREVENT + 1, 50,1)
     
     def dibujar_rectangulos(self):
         if obtener_modo() == True:  
@@ -215,6 +217,7 @@ class Nivel():
             if self.necromancer != None:
                 for rect in self.necromancer.rectangulos:
                     pygame.draw.rect(self._slave,"Orange", self.necromancer.rectangulos[rect],2)
+            
             
             for plataforma in self.plataformas:
                 for lado in plataforma.rectangulos:

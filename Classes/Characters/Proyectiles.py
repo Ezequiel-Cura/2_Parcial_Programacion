@@ -11,10 +11,10 @@ class Proyectiles(Items):
 
         self.pasos_animacion = 0
         self.proyectil_animation = proyectil_animation
-        self.animacion_actual = []
+        self.animacion_actual = proyectil_animation
 
-        for i in range(len(self.proyectil_animation)):
-            self.animacion_actual.append(pygame.transform.scale(self.proyectil_animation[i], tamaño))
+        # for i in range(len(self.proyectil_animation)):
+        #     self.animacion_actual.append(pygame.transform.scale(self.proyectil_animation[i], tamaño))
 
         self.rect:pygame.Rect = self.animacion_actual[0].get_rect()
         self.rect.x = posicion[0] 
@@ -43,9 +43,13 @@ class Proyectiles(Items):
         if self.pasos_animacion >= len(self.animacion_actual):
             self.pasos_animacion = 0
 
-            pantalla.blit(self.animacion_actual[self.pasos_animacion], self.rectangulos["principal"])
+        if self.direccion == 1:
+            pantalla.blit( pygame.transform.flip(self.animacion_actual[int(self.pasos_animacion)],True,False), (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))
+        else:
+            pantalla.blit(self.animacion_actual[int(self.pasos_animacion)], (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))
+        # pantalla.blit(self.animacion_actual[self.pasos_animacion], self.rectangulos["principal"])
         
-        self.pasos_animacion += 0.5
+        self.pasos_animacion += 0.10
 
     def verificar_limites(self, lista_plataformas:list[Plataforma], new_vel, pantalla):
         new_x = self.rectangulos["principal"].x + new_vel 

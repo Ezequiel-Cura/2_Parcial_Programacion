@@ -8,7 +8,6 @@ import pygame
 
 # 0 = Idle_der, 1 = Run_der, 2 = Jump_der, 3 = attack_der
 #   = Idle_izq,-1 = Run_izq, -2 = Jump_izq, -3 attack_izq
-list_animaciones_personaje = []
 
 personaje_idle = [       
     pygame.image.load(r"Assets\Images\Personaje\Idle\0.png"),
@@ -44,14 +43,6 @@ personaje_salta = [
     pygame.image.load(r"Assets\Images\Personaje\Jump\3.png"),
     pygame.image.load(r"Assets\Images\Personaje\Jump\4.png"),
     pygame.image.load(r"Assets\Images\Personaje\Jump\5.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\6.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\7.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\8.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\9.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\10.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\11.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\12.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Jump\13.png"),
 ]
 personaje_ataque = [
     pygame.image.load(r"Assets\Images\Personaje\Attack\0.png"),
@@ -73,33 +64,28 @@ personaje_ataque = [
 
 ]
 
-
-list_animaciones_personaje.append(personaje_idle)
-list_animaciones_personaje.append(personaje_run)
-list_animaciones_personaje.append(personaje_salta)
-list_animaciones_personaje.append(personaje_ataque)
+list_animaciones_personaje = [personaje_idle,personaje_run,personaje_salta,personaje_ataque]
 
 # Proyectil
 
 
-proyectil_animation = [
-    pygame.image.load(r"Assets\Images\Bullet\02.png")
-]
-
 # proyectil_animation = [
-#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt1.png"),
-#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt2.png"),
-#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt3.png"),
-#     pygame.image.load(r"Assets\Images\Bullet\bolt\bolt4.png"),
+#     pygame.image.load(r"Assets\Images\Bullet\02.png")
 # ]
 
+proyectil_animation = [
+    pygame.image.load(r"Assets\Images\Bullet\bolt\bolt1.png"),
+    pygame.image.load(r"Assets\Images\Bullet\bolt\bolt2.png"),
+    pygame.image.load(r"Assets\Images\Bullet\bolt\bolt3.png"),
+    pygame.image.load(r"Assets\Images\Bullet\bolt\bolt4.png"),
+]
 
 
 
 # Imagenes enemigos ---------------------------------------------------------------
 
 #goblin
-goblin_animations = []
+
 goblin_move = [
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\0.png"),
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Run\1.png"),
@@ -120,9 +106,7 @@ goblin_attack = [
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\6.png"),
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\7.png"),
 ]
-
-goblin_animations.append(goblin_move)
-goblin_animations.append(goblin_attack)
+goblin_animations = [goblin_move,goblin_attack]
 
 #Skeleton
 skeleton_move = [
@@ -182,6 +166,21 @@ boss_attack2 = []
 boss_fly = []
 boss_move = []
 
+# Items ----------------------------------------------------------------
+coin_animation = [
+    pygame.image.load(r"Assets\Images\Items\Coin\1.png"),
+    pygame.image.load(r"Assets\Images\Items\Coin\2.png"),
+    pygame.image.load(r"Assets\Images\Items\Coin\3.png"),
+    pygame.image.load(r"Assets\Images\Items\Coin\4.png"),
+    pygame.image.load(r"Assets\Images\Items\Coin\5.png"),
+    pygame.image.load(r"Assets\Images\Items\Coin\6.png"),
+]
+
+hp_surface = pygame.image.load(r"Assets\Images\Items\0.png")
+hp_surface = pygame.transform.scale(hp_surface, ( 50,50))
+heart_img = pygame.image.load(r"Assets\Images\Items\1.png")
+heart_img = pygame.transform.scale(heart_img, ( 50,50))
+
 #Imagenes de fondo ----------------------------------------------------------------
 
 #lvl 1
@@ -193,7 +192,20 @@ bg_demon_forest = [
 ]
 
 #lvl 2
-bg_cave = []
+bg_cave = [
+    pygame.image.load(r"Assets\Images\Backgrounds\Cave\background1.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Cave\background2.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Cave\background3.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Cave\background4a.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Cave\background4b.png"),
+]
 
 
 #lvl 3
+bg_space = [
+    pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-backgound.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-stars.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-far-planets.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-big-planet.png"),
+    pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-ring-planet.png"),
+]

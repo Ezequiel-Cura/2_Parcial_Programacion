@@ -1,11 +1,12 @@
 import pygame
 from Classes.Characters.Personaje import Personaje
 from Classes.Characters.Plataforma import Plataforma
+
 class Enemigo(Personaje):
-    def __init__(self, posicion, list_animaciones, velocidad):
+    def __init__(self, posicion, list_animaciones, velocidad, tamaño):
         self.direcion_actual = 1
 
-        super().__init__(velocidad, 10, (40, 60),posicion,list_animaciones)
+        super().__init__(velocidad, 10,tamaño ,posicion,list_animaciones)
 
     def update(self, PANTALLA, plataformas, jugador):
         self.aplicar_gravedad()
@@ -34,10 +35,15 @@ class Enemigo(Personaje):
                     self.rectangulos[rect].x += nueva_vel
 
             for plat in plataformas:
+
                 if self.rectangulos["principal"].colliderect(plat.rects_limites["rect_der"]):
                     self.mirando_izq = True
-                
                 if self.rectangulos["principal"].colliderect(plat.rects_limites["rect_izq"]):
+                    self.mirando_izq = False
+
+                if self.rectangulos["principal"].colliderect(plat.rectangulos["left"]):
+                    self.mirando_izq = True
+                if self.rectangulos["principal"].colliderect(plat.rectangulos["right"]):
                     self.mirando_izq = False
 
 

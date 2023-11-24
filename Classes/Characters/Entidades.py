@@ -4,12 +4,17 @@ import pygame
 class Entidades_Juego:
     def __init__(self,tamaño, posicion, list_animaciones):
         
+        
         self.que_hace = 0
         self.count = 0
         self.pasos_animacion = 0
         self.animaciones:list = list_animaciones
+
         self.list_animaciones:list = Entidades_Juego.reescalar_imagenes(self.animaciones, tamaño[0], tamaño[1])
-        self.animacion_actual:list[pygame.Surface] = self.list_animaciones[0]
+        if type(list_animaciones[0]) != list:
+            self.animacion_actual = self.list_animaciones
+        else:
+            self.animacion_actual:list[pygame.Surface] = self.list_animaciones[0]
 
         self.rect:pygame.Rect = self.animacion_actual[0].get_rect()
         self.rect.x = posicion[0]
@@ -92,16 +97,28 @@ class Entidades_Juego:
     
     @staticmethod
     def reescalar_imagenes(lista_animaciones, ancho, alto):
-        list_temp = []
-        for j in range(len(lista_animaciones)):
+        if type(lista_animaciones[0]) != list:
+            
             lista = []
-            for i in range(len(lista_animaciones[j])):
-                img = lista_animaciones[j][i]
-                # lista_animaciones[j][i] = pygame.transform.scale(img, (ancho, alto))
+            
+            for i in range(len(lista_animaciones)):
+                img = lista_animaciones[i]
                 img_res = pygame.transform.scale(img, (ancho, alto))
                 lista.append(img_res)
-            list_temp.append(lista)
-        return list_temp
+            return lista
+        
+        else:
+
+            list_temp = []
+            for j in range(len(lista_animaciones)):
+                lista = []
+                for i in range(len(lista_animaciones[j])):
+                    img = lista_animaciones[j][i]
+                    # lista_animaciones[j][i] = pygame.transform.scale(img, (ancho, alto))
+                    img_res = pygame.transform.scale(img, (ancho, alto))
+                    lista.append(img_res)
+                list_temp.append(lista)
+            return list_temp
 
     @staticmethod
     def rotar_imagen(imagenes:list):

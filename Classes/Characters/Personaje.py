@@ -6,6 +6,7 @@ from Classes.Characters.Entidades import Entidades_Juego
 class Personaje(Entidades_Juego):
     def __init__(self,velocidad, potencia_salto, tamaño, posicion, animaciones):
         
+        self.puntaje = 0
         #attack
         self.ataco = False
         self.rect_attack = None
@@ -39,6 +40,7 @@ class Personaje(Entidades_Juego):
 
             plataforma:pygame.Rect = plat
             if self.rectangulos["bottom"].colliderect(plataforma.rectangulos["top"]):
+
                 self.velocidad_y = 0
                 self.esta_aire = False
                 for lado in self.rectangulos:
@@ -63,7 +65,7 @@ class Personaje(Entidades_Juego):
         for plat in lista_plataformas:
             plataforma:pygame.Rect = plat
             if self.rectangulos["right"].colliderect(plataforma.rectangulos["left"]):
-
+                
                 for lado in self.rectangulos:
                     self.rectangulos[lado].right = plataforma.rectangulos["left"].left
                     if lado == "left" or lado == "top":
@@ -98,8 +100,14 @@ class Personaje(Entidades_Juego):
  
 
 
-    def verificar_colision_items(self, lista_items):
-        pass
+    def verificar_colision_items(self, lista_items, puntaje):
+        for item in lista_items:
+            if self.rectangulos["principal"].colliderect(item.rectangulos["principal"]):
+                print("RECOMPENSA")
+                self.puntaje += 10
+                ref_item = item
+                lista_items.remove(item)
+                del ref_item
 
     def lanzar_proyectil(self, objetivo):# Objetivo es el personaje?
         pass

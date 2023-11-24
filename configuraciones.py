@@ -160,11 +160,88 @@ necro_animation = [necro_walk, necro_revive]
 
 
 #boss chuthullu
-boss_idle = []
-boss_attack1 = []
-boss_attack2 = []
-boss_fly = []
-boss_move = []
+boss_idle = [
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_7.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_8.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_9.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_10.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_11.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_12.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_13.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_14.png"),
+    pygame.image.load(r"Assets\Images\Boss\idle\idle_15.png"),
+]
+boss_move = [
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_7.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_8.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_9.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_10.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_11.png"),
+    pygame.image.load(r"Assets\Images\Boss\walk\walk_12.png"),
+]
+boss_fly = [
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\fly\fly_6.png"),
+]
+boss_attack1 = [
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_7.png"),
+]
+boss_attack2 = [
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_7.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_8.png"),
+    pygame.image.load(r"Assets\Images\Boss\2atk\2atk_9.png"),
+]
+boss_hurt = [
+    pygame.image.load(r"Assets\Images\Boss\hurt\hurt_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\hurt\hurt_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\hurt\hurt_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\hurt\hurt_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\hurt\hurt_5.png"),
+
+]
+boss_death = [
+    pygame.image.load(r"Assets\Images\Boss\death\death_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_7.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_8.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_9.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_10.png"),
+    pygame.image.load(r"Assets\Images\Boss\death\death_11.png"),
+]
+
+boss_animation = [boss_idle, boss_move, boss_fly, boss_attack1, boss_attack2]
 
 # Items ----------------------------------------------------------------
 coin_animation = [

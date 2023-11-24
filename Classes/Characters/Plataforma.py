@@ -35,13 +35,13 @@ class Plataforma(Entidades_Juego):
 
         rect_izq = pygame.Rect(self.rectangulos["principal"].topleft[0], 
                                self.rectangulos["principal"].topleft[1] - 10,
-                                10,
-                                10
+                                5,
+                                5
                                )
         rect_der = pygame.Rect(self.rectangulos["principal"].topright[0] - 10, 
                                self.rectangulos["principal"].topright[1] - 10,
-                                10,
-                                10
+                                5,
+                                5
                                )
         dicc_rects = {
             "rect_izq": rect_izq,

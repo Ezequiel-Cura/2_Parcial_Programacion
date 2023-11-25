@@ -21,7 +21,7 @@ class Nivel_3(Nivel):
 
 
         #PERSONAJE
-        posicion = (W/2, H/2)
+        posicion = (W/2+ 50, H/2)
         tamaño = (60, 80)
         list_animaciones = list_animaciones_personaje
         mi_personaje = PersonajePrincipal(tamaño, posicion, list_animaciones)

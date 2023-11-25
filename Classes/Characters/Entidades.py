@@ -11,6 +11,7 @@ class Entidades_Juego:
         self.animaciones:list = list_animaciones
 
         self.list_animaciones:list = Entidades_Juego.reescalar_imagenes(self.animaciones, tamaño[0], tamaño[1])
+        
         if type(list_animaciones[0]) != list:
             self.animacion_actual = self.list_animaciones
         else:

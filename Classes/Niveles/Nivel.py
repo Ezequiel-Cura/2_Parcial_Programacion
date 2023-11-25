@@ -30,7 +30,7 @@ class Nivel():
         self.lista_bullets:list[Proyectiles] = []
 
         pygame.font.init()
-        self.fuente = pygame.font.SysFont("Arial",30)
+        self.fuente = pygame.font.SysFont("Assets\font\PixelifySans-VariableFont_wght.ttf",40)
 
         self.tiempo1 = 0
 
@@ -63,7 +63,7 @@ class Nivel():
                 enemig = Enemigo((random_x,0), skeleton_animation, 3, (50, 70))
                 self.lista_enemigos.append(enemig)
         elif nivel == 3:
-            self.boss = Boss((500,500),boss_animation,10,(350, 400))
+            self.boss = Boss((500,500),boss_animation,4,(350, 400))
 
     def generar_recompensa_aleatoria(self, lista_plataformas):
         for plat in lista_plataformas:
@@ -74,7 +74,7 @@ class Nivel():
         
     def set_recompensas(self, pantalla):
         self.puntaje_nivel = self.jugador.puntaje
-        self.puntaje_nivel_texto = self.fuente.render(f"{self.puntaje_nivel}", False, "white", None)
+        self.puntaje_nivel_texto = self.fuente.render(f"Points: {self.puntaje_nivel}", False, "white", None)
 
         pantalla.blit(self.puntaje_nivel_texto, (1000, 0))
 
@@ -86,7 +86,7 @@ class Nivel():
             self.tiempo1 = tiempo2
             # Resto 1, cada 1 segundo
             self._tiempo -= 1
-        self.tiempo_texto = self.fuente.render(f"{self._tiempo}", False, "white", None)
+        self.tiempo_texto = self.fuente.render(f"Time:{self._tiempo}", False, "white", None)
 
         pantalla.blit(self.tiempo_texto, (1500, 0))
 
@@ -179,7 +179,7 @@ class Nivel():
             self.necromancer.update(self._slave, self.plataformas, self.jugador, self.lista_enemigos)
 
         if self.boss != None:
-            self.boss.update(self._slave, self.jugador)
+            self.boss.update(self._slave, self.jugador, self.plataformas)
 
         for enem in self.lista_enemigos:
             enem.update(self._slave, self.plataformas, self.jugador)
@@ -243,10 +243,11 @@ class Nivel():
             if self.necromancer != None:
                 for rect in self.necromancer.rectangulos:
                     pygame.draw.rect(self._slave,"Orange", self.necromancer.rectangulos[rect],2)
+
             if self.boss != None:
                 for rect in self.boss.rectangulos:
-                    pygame.draw.rect(self._slave,"Orange", self.boss.rectangulos[rect],2)
-            
+                    pygame.draw.rect(self._slave,"red", self.boss.rectangulos[rect],2)
+
             for item in self.lista_recompensas:
                 pygame.draw.rect(self._slave,"white", item.rectangulos["principal"],2)
 

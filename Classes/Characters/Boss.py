@@ -1,43 +1,92 @@
 import pygame, random
+from Classes.Characters.Entidades import Entidades_Juego
 from Classes.Characters.Personaje_enemigo import Enemigo
 from Classes.Characters.Plataforma import Plataforma
 from configuraciones import *
 
 class Boss(Enemigo):
     def __init__(self, posicion, list_animaciones, velocidad, tamaño):
-        self.mover_boss = True
-        self.superficie = pygame.Surface((300,400))
-        
-
 
         super().__init__(posicion, list_animaciones, velocidad, tamaño)
-    
-    def update(self, pantalla,jugador):
+        self.mover_boss = True
+        self.llego_pos = False
+        self.flag = True
+        self.is_flying = False
+
+        self.healt = 30
+        self.custom_rect = pygame.Rect((posicion[0], posicion[1]), (150,250))
+
+        self.rectangulos = None
+        self.rectangulos = Entidades_Juego.obtener_rectangulos(self.custom_rect, 50,50)
+
+
+        # tamaño display(1900, 1000)
+        self.random_pos = None
+        self.location_screen = [(247, 100), (679, 124), (1484, 53),
+                                (197, 582),(713, 440),(1548, 368),
+                                (1008, 642),(498, 672),(1595, 618)]
+
+
+
+    def update(self, pantalla,jugador,lista_plataformas):
         self.animar_movimiento(pantalla)
 
-        self.comportamiento(jugador)
-
-
-    def comportamiento(self, jugador):
-        random_x = random.randint(200, 1600)
-        random_y = random.randint(400,800)
-
-        if self.mover_boss:
-            self.mover_boss = True
-            if self.rectangulos["principal"].x > random_x:
-                self.rectangulos["principal"].x -= self.velocidad
-            else:
-                self.rectangulos["principal"].x += self.velocidad
-            if self.rectangulos["principal"].y > random_y:
-                self.rectangulos["principal"].y -= self.velocidad
-            else:
-                self.rectangulos["principal"].y += self.velocidad
-            # self.rectangulos["principal"].x = random_x
-            # self.rectangulos["principal"].y = random_y
-            pygame.time.set_timer(pygame.USEREVENT + 6, 5000,1)
+        # if not self.is_flying:
+        #     self.aplicar_gravedad()
         
+        # self.verificar_colision_piso(lista_plataformas)
+
+        self.comportamiento(jugador, pantalla)
+
+
+    def comportamiento(self, jugador, pantalla):
+       
+        
+        # Esto para que siempre este mirando para el lado donde esta el jugador
         if jugador.rectangulos["principal"].centerx < self.rectangulos["principal"].centerx:
+            self.movimiento_boss(jugador.rectangulos["principal"].center)
             self.mirando_izq = True
         else:
+            self.movimiento_boss(jugador.rectangulos["principal"].center)
             self.mirando_izq = False
+       
 
+    def movimiento_boss(self, pos):
+        vel_x = self.velocidad
+        vel_y = self.velocidad
+
+
+        if self.rectangulos["principal"].x > pos[0]:
+            for lado in self.rectangulos:
+                self.rectangulos[lado].x -= vel_x
+        else:
+            for lado in self.rectangulos:
+                self.rectangulos[lado].x += vel_x
+
+
+            if self.rectangulos["principal"].y > pos[1]:
+                for lado in self.rectangulos:
+                    self.rectangulos[lado].y -= vel_y
+            else:
+                for lado in self.rectangulos:
+                    self.rectangulos[lado].y += vel_y
+
+
+
+    def animar_movimiento(self, pantalla):
+        self.animacion_actual = self.list_animaciones[self.que_hace]
+        self.count += 1
+
+        if self.count > 5:
+            self.pasos_animacion += 1
+            self.count = 0
+
+        if self.pasos_animacion >= len(self.animacion_actual):
+            self.pasos_animacion = 0
+
+
+        if self.mirando_izq == True:
+            # nueva_lista = Entidades_Juego.rotar_imagen(self.animacion_actual[int(self.pasos_animacion)])
+            pantalla.blit( pygame.transform.flip(self.animacion_actual[int(self.pasos_animacion)],True,False), (self.rectangulos["principal"].x  - 100, self.rectangulos["principal"].y - 100))
+        else:
+            pantalla.blit(self.animacion_actual[int(self.pasos_animacion)], (self.rectangulos["principal"].x - 100 , self.rectangulos["principal"].y -100))

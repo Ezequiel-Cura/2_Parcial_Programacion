@@ -22,7 +22,7 @@ class Nivel_1(Nivel):
         list_animaciones = list_animaciones_personaje
         mi_personaje = PersonajePrincipal(tamaño, posicion, list_animaciones)
 
-
+        print("nivel_1")
 
         #PLATAFORMAS
         piso = Plataforma((W, 100),(0, H * 0.9), False)

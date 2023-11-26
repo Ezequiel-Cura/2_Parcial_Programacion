@@ -141,6 +141,9 @@ class Nivel():
     # ACTUALIZA TODA LA PANTALLA, MOVIMIENTO DE PERSONAJE Y DEMAS
     def actualizar_pantalla(self):
         self._slave.blit(self.img_fondo, (0,0))
+
+
+
         # self._slave.blit(self.vidas_texto, (700, 0))
         self.set_tiempo(self._slave)
         self.set_vidas(self._slave)

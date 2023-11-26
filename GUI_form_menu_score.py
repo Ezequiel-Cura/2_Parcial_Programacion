@@ -13,12 +13,12 @@ class FormMenuScore(Form):
         aux_image = pygame.transform.scale(aux_image,(w,h))
         self._slave = aux_image
         self._score = scoreboard
-        self.lista_widgets = []
+ 
 
         self._margen_y = margen_y
         #Creo 2 labels y los agrego a la lista de widgets
         self.lista_widgets.append(
-            Label(screen=self._slave, x=margen_x+10,y=20,w=w/2-margen_x-10,h=50,text = "Jugador", font="Verdana",font_size=30,font_color=(255,255,255),path_image="Recursos\\bar.png"))
+            Label(screen=self._slave, x=margen_x+10,y=20,w=w/2-margen_x-10,h=50,text = "Jugador", font="Verdana",font_size=30,font_color=(255,255,255),path_image=r"Assets\UI\bar.png"))
         self.lista_widgets.append(
             Label(screen=self._slave,
                  x=margen_x+10+w/2-margen_x-10,
@@ -27,7 +27,7 @@ class FormMenuScore(Form):
                 font="Verdana",
                 font_size=30,
                 font_color=(255,255,255),
-                path_image="Recursos\\bar.png"))
+                path_image=r"Assets\UI\bar.png"))
         
         pos_inicial_y = margen_y
         
@@ -41,7 +41,7 @@ class FormMenuScore(Form):
                 cadena = f"{s}"
                 pos = Label(screen=self._slave, x=pos_inicial_x,y=pos_inicial_y,
                             w=w/2-margen_x,h=100,text = cadena, font="Verdana",font_size=30,
-                            font_color=(255,255,255),path_image="Recursos\Table.png")
+                            font_color=(255,255,255),path_image=r"Assets\UI\Table.png")
                 self.lista_widgets.append(pos)
                 pos_inicial_x += w/2-margen_x
                 
@@ -57,7 +57,7 @@ class FormMenuScore(Form):
                                        y=  h- 70  ,
                                        w=  50,
                                        h=   50,
-                                       path_image="Recursos\home.png",
+                                       path_image=r"Assets\UI\home.png",
                                        onclick=self.btn_home_click,
                                        onclick_param= ""
                                        )

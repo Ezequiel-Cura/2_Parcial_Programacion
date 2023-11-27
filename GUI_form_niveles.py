@@ -14,14 +14,28 @@ from GUI_form_contenedor_nivel import FormContenedorNivel
 class Menu_niveles(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
         super().__init__(screen, x, y, w, h, color_background, color_border, border_size, active)
-
+        self.name = ""
         self.manejador_niveles = Manejador_niveles(self._master)
+        self.num_nivel = 1
 
+        self.label_nombre = Label(self._slave, 50,0, 100, 50, "Insert name","Comic Sans MS",15, "black",r"Assets\UI\Table.png")
+
+        self.txtNombre = TextBox(self._slave, x, y, 50,50, 150, 30, 
+                                "gray", "white","red","blue", 2, 
+                                "Comic Sans MS",15, "black")
+        
+        self.btn_save_name = Button(self._slave, x, y,
+                                    200, 50,
+                                    100,50, "black","white",
+                                    self.btn_save_name_click, "",
+                                    "Save name","Verdana", 15, "white"
+                                     )
+        
         self.btn_nivel_1 = Button(self._slave, x, y, 
                                   100,200,
                                 100,50,
                                 "red","blue",
-                                self.entrar_nivel, "nivel_uno",
+                                self.entrar_nivel, 1,
                                 "1", "Verdana", 15, "white"
                                 )
         
@@ -29,7 +43,7 @@ class Menu_niveles(Form):
                                   300,200,
                                 100,50,
                                 "red","blue",
-                                self.entrar_nivel, "nivel_dos",
+                                self.entrar_nivel, 2,
                                 "2", "Verdana", 15, "white"
                                 )
         
@@ -37,13 +51,19 @@ class Menu_niveles(Form):
                                   500,200,
                                 100,50,
                                 "red","blue",
-                                self.entrar_nivel, "nivel_tres",
+                                self.entrar_nivel, 3,
                                 "3", "Verdana", 15, "white"
                                 )
 
         self.lista_widgets.append(self.btn_nivel_1)
         self.lista_widgets.append(self.btn_nivel_2)
         self.lista_widgets.append(self.btn_nivel_3)
+        self.lista_widgets.append(self.txtNombre)
+        self.lista_widgets.append(self.btn_save_name)
+        self.lista_widgets.append(self.label_nombre)
+
+
+
         #Crear boton home
         self.boton_home = Button_Image(screen=self._slave,
                                        master_x=   x,
@@ -59,10 +79,16 @@ class Menu_niveles(Form):
 
         self.lista_widgets.append(self.boton_home)
 
-    def entrar_nivel(self,nombre_nivel):
-        nivel = self.manejador_niveles.get_nivel(nombre_nivel)
-        form_contenedor_nivel = FormContenedorNivel(self._master, nivel)
-        self.show_dialog(form_contenedor_nivel)
+    def btn_save_name_click(self, parametro):
+        self.name = self.txtNombre.get_text()
+
+    def entrar_nivel(self,num_nivel):
+        if self.name != "":
+
+            self.num_nivel = num_nivel
+            nivel = self.manejador_niveles.get_nivel(f"nivel_{self.num_nivel}")
+            form_contenedor_nivel = FormContenedorNivel(self._master, nivel,self.name)
+            self.show_dialog(form_contenedor_nivel)
 
     def render(self):
         self._slave.fill(self._color_background)

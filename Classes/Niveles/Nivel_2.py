@@ -33,7 +33,7 @@ class Nivel_2(Nivel):
         plat5 = Plataforma((200, 50),(W * 0.6, H * 0.6), True,r"Assets\Images\Backgrounds\Cave\0.png")
         plat6 = Plataforma((400, 50),(W * 0.5, H * 0.2), True,r"Assets\Images\Backgrounds\Cave\0.png")
 
-        pared = Plataforma((100,100),(W * 0.5, H * 0.1), False)# Pared
+        pared = Plataforma((100,100),(W * 0.5, H * 0.1), True,r"Assets\Images\Backgrounds\Cave\0.png", True)# Pared
 
         lista_plataformas = [piso, plat1, plat2, plat3, plat4, plat5, plat6, pared]
 

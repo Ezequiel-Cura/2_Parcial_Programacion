@@ -25,7 +25,7 @@ class FormPrincipal(Form):
         pygame.mixer.music.set_volume(self.volumen)
         pygame.mixer.music.play(-1)
 
-
+        
         ##COMPLETAR
 
 

@@ -7,11 +7,12 @@ from Classes.Niveles.Nivel_3 import Nivel_3
 
 class Manejador_niveles:
     def __init__(self, pantalla) -> None:
+
         self._slave = pantalla
         self.niveles = {
-            "nivel_uno": Nivel_1,
-            "nivel_dos": Nivel_2,
-            "nivel_tres": Nivel_3
+            "nivel_1": Nivel_1,
+            "nivel_2": Nivel_2,
+            "nivel_3": Nivel_3
         }
 
     def get_nivel(self, nombre_nivel):

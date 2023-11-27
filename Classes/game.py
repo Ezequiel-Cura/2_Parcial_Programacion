@@ -9,7 +9,7 @@ from GUI_form_principal import FormPrincipal
 class Game(Config):
     def __init__(self, size, FPS, caption = "Title", icon = ""):
         super().__init__(size, FPS, caption, icon)
-
+        
         self.form = FormPrincipal(self.SCREEN,
                                500,100,
                                1000,500,
@@ -18,6 +18,8 @@ class Game(Config):
                                2,
                                True
                                )
+        self.set_background_image(r"Assets\Images\Backgrounds\menu_bg.jpg")
+
 
     def init(self):
         py.init()
@@ -35,7 +37,8 @@ class Game(Config):
                 # if event.type == py.MOUSEBUTTONDOWN:
                 #     print(event.pos)
                 
-            self.fill_screen()
+            # self.fill_screen()
+            self.SCREEN.blit(self.background_image,(0,0))
             
             self.form.update(lista_eventos)
 

@@ -2,7 +2,7 @@ import pygame
 from Classes.Characters.Entidades import Entidades_Juego
 
 class Plataforma(Entidades_Juego):
-    def __init__(self, tamaño, posicion, es_visible = False, path = ""):
+    def __init__(self, tamaño, posicion, es_visible = False, path = "", es_pared = False):
         self.es_visible = es_visible
         self.plataforma = Plataforma.crear_plataforma(es_visible, False, tamaño, posicion, path)
         self.rectangulos = Entidades_Juego.obtener_rectangulos(self.plataforma["rectangulo"], self.plataforma["rectangulo"].width, self.plataforma["rectangulo"].height)

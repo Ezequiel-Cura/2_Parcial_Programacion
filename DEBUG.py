@@ -1,5 +1,5 @@
 
-DEBUG = True 
+DEBUG = False 
 
 def cambiar_modo():
     global DEBUG 

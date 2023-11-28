@@ -64,6 +64,13 @@ personaje_ataque = [
 
 ]
 
+dicc_animaciones_personaje = {
+    "idle": personaje_idle,
+    "run":personaje_run,
+    "jump": personaje_salta,
+    "attack":personaje_ataque
+}
+
 list_animaciones_personaje = [personaje_idle,personaje_run,personaje_salta,personaje_ataque]
 
 # Proyectil
@@ -106,6 +113,11 @@ goblin_attack = [
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\6.png"),
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\7.png"),
 ]
+
+dicc_animations_goblin = {
+    "run": goblin_move,
+    "attack": goblin_attack
+}
 goblin_animations = [goblin_move,goblin_attack]
 
 #Skeleton
@@ -125,6 +137,10 @@ skeleton_attack = [
     pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\6.png"),
     pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\7.png"),
 ]
+
+dicc_animations_skeleton = {
+    ""
+}
 
 skeleton_animation = [skeleton_move, skeleton_attack]
 
@@ -155,6 +171,12 @@ necro_revive = [
     pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\11.png"),
     pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\12.png"),
 ]
+
+dicc_animations_necro = {
+    "run": necro_walk,
+    "revive": necro_revive,
+    
+}
 
 necro_animation = [necro_walk, necro_revive]
 
@@ -241,6 +263,12 @@ boss_death = [
     pygame.image.load(r"Assets\Images\Boss\death\death_11.png"),
 ]
 
+dicc_animations_boss = {
+    "idle": boss_idle,
+    "run": boss_move,
+    "fly": boss_fly
+}
+
 boss_animation = [boss_idle, boss_move, boss_fly, boss_attack1, boss_attack2]
 
 # Items ----------------------------------------------------------------
@@ -286,3 +314,20 @@ bg_space = [
     pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-big-planet.png"),
     pygame.image.load(r"Assets\Images\Backgrounds\Space\parallax-space-ring-planet.png"),
 ]
+
+
+# -------------------- AUDIO --------------------------------------------
+pygame.mixer.init()
+
+lose_audio = pygame.mixer.Sound(r"Assets\Music\Death.ogg")
+
+victory_audio = pygame.mixer.Sound(r"Assets\Music\Victory.ogg")
+
+
+
+
+
+
+
+
+

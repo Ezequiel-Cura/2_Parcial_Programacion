@@ -22,10 +22,6 @@ class Boss(Enemigo):
 
         # tamaño display(1900, 1000)
         self.random_pos = None
-        self.location_screen = [(247, 100), (679, 124), (1484, 53),
-                                (197, 582),(713, 440),(1548, 368),
-                                (1008, 642),(498, 672),(1595, 618)]
-
 
 
     def update(self, pantalla,jugador,lista_plataformas):

@@ -287,8 +287,8 @@ class Nivel(Form):
             #RECTANGULOS PERSONAJE
             for rect in self.jugador.rectangulos:
                 pygame.draw.rect(self._slave,"Orange", self.jugador.rectangulos[rect],2)
-            if self.jugador.ataco:
-                pygame.draw.rect(self._slave,"red" ,self.jugador.rect_attack, 2)
+            # if self.jugador.ataco:
+            #     pygame.draw.rect(self._slave,"red" ,self.jugador.rect_attack, 2)
 
 
             #RECTANGULOS BULLETS

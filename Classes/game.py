@@ -1,6 +1,5 @@
 import pygame as py
 from Classes.config_game import Config
-from configuraciones import *
 from DEBUG import *
 
 from GUI_form_principal import FormPrincipal
@@ -20,10 +19,14 @@ class Game(Config):
                                )
         self.set_background_image(r"Assets\Images\Backgrounds\menu_bg.jpg")
 
+        
+
+
+
 
     def init(self):
         py.init()
-
+        
         while self.running:
             
             self.clock.tick(self.FPS) 

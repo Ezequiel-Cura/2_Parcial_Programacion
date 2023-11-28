@@ -120,6 +120,12 @@ class Entidades_Juego:
                     lista.append(img_res)
                 list_temp.append(lista)
             return list_temp
+        
+    def reescalalar_imagenesa(diccionario_animaciones, ancho, alto):
+        for clave in diccionario_animaciones:
+            for i in range(len(diccionario_animaciones[clave])):
+                img = diccionario_animaciones[clave][i]
+                diccionario_animaciones[clave][i] = pygame.transform.scale(img, (ancho, alto))
 
     @staticmethod
     def rotar_imagen(imagenes:list):

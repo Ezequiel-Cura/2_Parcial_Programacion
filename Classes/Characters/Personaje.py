@@ -26,8 +26,10 @@ class Personaje(Entidades_Juego):
         super().__init__( tamaño, posicion, animaciones )
 
 
-    def aplicar_gravedad(self):
+    def aplicar_gravedad(self, PANTALLA):
         if self.esta_aire:
+            self.animar_movimiento(PANTALLA)
+            
             for rect in self.rectangulos:
                 self.rectangulos[rect].y += self.velocidad_y
 
@@ -40,14 +42,14 @@ class Personaje(Entidades_Juego):
 
             plataforma:pygame.Rect = plat
             if self.rectangulos["bottom"].colliderect(plataforma.rectangulos["top"]):
-
+                self.esta_saltando = False
                 self.velocidad_y = 0
                 self.esta_aire = False
                 for lado in self.rectangulos:
                     self.rectangulos[lado].bottom = plataforma.rectangulos["top"].top
                     if lado == "top":
                         self.rectangulos[lado].top = self.rectangulos["principal"].top
-                # print("COLISION")
+
                 break
             elif self.rectangulos["top"].colliderect(plat.rectangulos["bottom"]):
                 self.velocidad_y = 25
@@ -57,7 +59,7 @@ class Personaje(Entidades_Juego):
                         self.rectangulos[lado].top = self.rectangulos["principal"].bottom
                 break
             else:
-                # print("MAL")
+
                 self.esta_aire = True
 
     
@@ -96,7 +98,8 @@ class Personaje(Entidades_Juego):
                 lista_objetivo.remove(ene)
                 del ref_ene
 
-        pygame.draw.rect(pantalla,"red" ,self.rect_attack)
+        # pygame.draw.rect(pantalla,"red" ,self.rect_attack)
+
  
 
 

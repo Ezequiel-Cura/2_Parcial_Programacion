@@ -10,6 +10,7 @@ class PersonajePrincipal(Personaje):
         self.vidas = 3
         self.esta_saltando = False
         self.inmune = False
+        self.movimiento_aereo = False
         # animaciones_res = Personaje.reescalar_imagenes(animaciones, tamaño[0], tamaño[1])
 
         self.list_proyectiles  = [] 
@@ -24,8 +25,45 @@ class PersonajePrincipal(Personaje):
                     self.inmune = True
                     self.vidas -= 1
         
+    def update(self, PANTALLA, plataformas, lista_enemigos, lista_recompensas, puntaje):
+        
         
 
+        if self.que_hace == "idle" and not self.esta_aire:
+            if not self.esta_aire:
+                print("idle")
+                self.limit_count = 5
+                self.animacion_actual = self.animaciones["idle"]
+
+                
+        if self.que_hace == "run" or self.movimiento_aereo:
+                print("run")
+                if not self.esta_aire:
+                    self.limit_count = 5
+                    self.animacion_actual = self.animaciones["run"]
+                self.mover(PANTALLA)
+                
+        if self.que_hace == "jump":
+                self.limit_count = 20
+                self.animacion_actual = self.animaciones["jump"]
+                print("juump")
+                self.saltar(plataformas)
+
+
+        if self.que_hace == "attack" or self.ataco :
+            if not self.esta_aire:
+                print("attack")
+                self.limit_count = 15
+                self.animacion_actual = self.animaciones["attack"]
+                self.attack(PANTALLA, lista_enemigos)
+
+
+        self.animar_movimiento(PANTALLA)
+        self.aplicar_gravedad(PANTALLA)
+        self.verificar_colision_piso(plataformas)
+        self.verificar_colision_pared(plataformas)    
+        self.verificar_colision_enemigo(lista_enemigos)
+        self.verificar_colision_items(lista_recompensas, puntaje)
 
     def verificar_accion(self, que_hizo):
         pass

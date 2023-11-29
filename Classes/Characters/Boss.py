@@ -36,36 +36,16 @@ class Boss(Enemigo):
 
 
     def comportamiento(self, jugador, pantalla):
-       
-        
+        rect_arriba = pygame.Rect(0,0, 800, 400)
+        pygame.draw.rect(pantalla,rect_arriba)
+
         # Esto para que siempre este mirando para el lado donde esta el jugador
         if jugador.rectangulos["principal"].centerx < self.rectangulos["principal"].centerx:
-            self.movimiento_boss(jugador.rectangulos["principal"].center)
             self.mirando_izq = True
         else:
-            self.movimiento_boss(jugador.rectangulos["principal"].center)
+           
             self.mirando_izq = False
        
-
-    def movimiento_boss(self, pos):
-        vel_x = self.velocidad
-        vel_y = self.velocidad
-
-
-        if self.rectangulos["principal"].x > pos[0]:
-            for lado in self.rectangulos:
-                self.rectangulos[lado].x -= vel_x
-        else:
-            for lado in self.rectangulos:
-                self.rectangulos[lado].x += vel_x
-
-
-            if self.rectangulos["principal"].y > pos[1]:
-                for lado in self.rectangulos:
-                    self.rectangulos[lado].y -= vel_y
-            else:
-                for lado in self.rectangulos:
-                    self.rectangulos[lado].y += vel_y
 
 
 

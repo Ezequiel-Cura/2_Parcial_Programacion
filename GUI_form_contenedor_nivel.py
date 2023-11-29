@@ -55,9 +55,11 @@ class FormContenedorNivel(Form):
                 if res["que_hacer"] == "Menu":
                     self.btn_home_click("hola")
                 elif res["que_hacer"] == "Siguiente Nivel":
+
+                    self._slave.fill("black")
                     print("Siguiente Nivel")
                     self.btn_home_click("")
-                    # self.nivel = Nivel_2(self._master)
+                    self.nivel = Nivel_2(self._master)
 
         for widget in self.lista_widgets:
             widget.update(lista_eventos)

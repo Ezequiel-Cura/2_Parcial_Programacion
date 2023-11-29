@@ -18,8 +18,8 @@ class Nivel_1(Nivel):
         #PERSONAJE
         posicion = (W/2, H/2)
         tamaño = (60, 80)
-        list_animaciones = list_animaciones_personaje
-        mi_personaje = PersonajePrincipal(tamaño, posicion, list_animaciones)
+        dicc_animaciones = dicc_animaciones_personaje
+        mi_personaje = PersonajePrincipal(tamaño, posicion, dicc_animaciones)
 
         #PLATAFORMAS
         piso = Plataforma((W, 100),(0, H * 0.9), True,r"Assets\Images\Backgrounds\Forest\0.png")

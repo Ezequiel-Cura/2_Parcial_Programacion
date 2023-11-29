@@ -63,18 +63,18 @@ class Nivel(Form):
         if nivel == 1:
             for i in range(10):
                 random_x = random.randint(20, self._slave.get_width() -20)
-                enemig = Enemigo((random_x,0), goblin_animations, 3, (40, 60))
+                enemig = Enemigo((random_x,0), dicc_animations_goblin, 3, (40, 60))
                 self.lista_enemigos.append(enemig)
 
         elif nivel == 2:
-            self.necromancer = Necromancer((self._slave.get_height() * 0.5,0),necro_animation, 5, (50,70))
+            self.necromancer = Necromancer((self._slave.get_height() * 0.5,0),dicc_animations_necro, 5, (50,70))
             for i in range(5):
                 random_x = random.randint(20, self._slave.get_width() -20)
-                enemig = Enemigo((random_x,0), skeleton_animation, 3, (50, 70))
+                enemig = Enemigo((random_x,0), dicc_animations_skeleton, 3, (50, 70))
                 self.lista_enemigos.append(enemig)
 
         elif nivel == 3:
-            self.boss = Boss((500,500),boss_animation,4,(350, 400))
+            self.boss = Boss((500,500),dicc_animations_boss,4,(350, 400))
 
     def generar_recompensa_aleatoria(self, lista_plataformas:list[Plataforma]):
         for plat in lista_plataformas:
@@ -143,6 +143,8 @@ class Nivel(Form):
             elif evento.type == pygame.USEREVENT + 6:
                 if self.boss != None:
                     self.boss.mover_boss = True
+            elif evento.type == pygame.USEREVENT + 7:
+                self.jugador.ataco = False
 
         self.name = name
         if self.game_over:
@@ -161,6 +163,9 @@ class Nivel(Form):
                 self.que_hacer = "Menu"
             
             if self.gano:
+                
+                texto_perdio = self.fuente_grande.render("YOU WIN", False, "white", "black")
+                self._slave.blit(texto_perdio, (self._slave.get_width() / 2,self._slave.get_height() / 2))
 
                 if self.escribir_archivo:
                     self.escribir_archivo = False
@@ -201,10 +206,10 @@ class Nivel(Form):
             plataforma.draw(self._slave) # dibujamos platafromas
 
         #bliteamos personaje y lo actualizamos
-        self.jugador.update(self._slave, self.lista_plataformas, self.lista_enemigos)
-        self.jugador.verificar_colision_enemigo(self.lista_enemigos)
-        self.jugador.verificar_colision_items(self.lista_recompensas, self.puntaje_nivel)
-        self.jugador.animar_movimiento(self._slave)
+        self.jugador.update(self._slave, self.lista_plataformas, self.lista_enemigos, self.lista_recompensas,self.puntaje_nivel)
+        # self.jugador.verificar_colision_enemigo(self.lista_enemigos)
+        # self.jugador.verificar_colision_items(self.lista_recompensas, self.puntaje_nivel)
+        # self.jugador.animar_movimiento(self._slave)
 
         for item in self.lista_recompensas:
             item.update(self._slave)
@@ -243,22 +248,37 @@ class Nivel(Form):
         teclas = pygame.key.get_pressed()
         # 0 = Idle_der, 1 = Run_der, 2 = Jump_der, 3 = attack_der
         #   = Idle_izq,-1 = Run_izq, -2 = Jump_izq, -3 attack_izq
+        
         if teclas[pygame.K_a]:
             self.jugador.mirando_izq = True
-            self.jugador.que_hace = 1
+            self.jugador.que_hace = "run"
+            self.jugador.movimiento_aereo = True
         elif teclas[pygame.K_d]:
-
             self.jugador.mirando_izq = False
-            self.jugador.que_hace = 1
+            self.jugador.que_hace = "run"
+            self.jugador.movimiento_aereo = True
         else:
-            self.jugador.que_hace = 0
+            self.jugador.que_hace = "idle"
+            self.jugador.movimiento_aereo = False
 
         if teclas[pygame.K_SPACE] and self.jugador.attack_delay:
             self.jugador.ataco = True
-            pygame.time.set_timer(pygame.USEREVENT, 1000,1)
-
+            self.jugador.movimiento_aereo = False
             self.jugador.attack_delay = False
-            self.jugador.que_hace = 3
+            self.jugador.que_hace = "attack"
+            pygame.time.set_timer(pygame.USEREVENT, 1000,1)
+            pygame.time.set_timer(pygame.USEREVENT + 7, 500,1)
+
+       
+        if teclas[pygame.K_w] and self.jugador.jump_delay and not self.jugador.esta_aire:
+            self.jugador.esta_aire = True
+            self.jugador.esta_saltando = True
+            self.jugador.jump_delay = False
+            self.jugador.que_hace = "jump"
+            self.jugador.press_tecla_w = True
+            pygame.time.set_timer(pygame.USEREVENT + 1, 50,1)
+
+
 
         if teclas[pygame.K_f] and self.jugador.shoot_delay:
             pygame.time.set_timer(pygame.USEREVENT + 2, 500,1)
@@ -273,13 +293,9 @@ class Nivel(Form):
                 nuevo_proyectil = Proyectiles((50,50), (x, y),  1)
 
             self.lista_bullets.append(nuevo_proyectil)
+        
 
-        if teclas[pygame.K_w] and self.jugador.jump_delay:
-            self.jugador.esta_saltando = True
-            self.jugador.jump_delay = False
-            self.jugador.que_hace = 2
-            self.jugador.press_tecla_w = True
-            pygame.time.set_timer(pygame.USEREVENT + 1, 50,1)
+        
     
     def dibujar_rectangulos(self):
         if obtener_modo() == True:  

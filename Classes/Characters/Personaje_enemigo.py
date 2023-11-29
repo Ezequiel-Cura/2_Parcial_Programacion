@@ -7,10 +7,12 @@ class Enemigo(Personaje):
         self.direcion_actual = 1
 
         super().__init__(velocidad, 10,tamaño ,posicion,list_animaciones)
+        self.que_hace = "run"
 
     def update(self, PANTALLA, plataformas, jugador):
-        self.aplicar_gravedad()
+        self.aplicar_gravedad(PANTALLA)
         self.verificar_colision_piso(plataformas)
+        self.verificar_colision_pared(plataformas)
         self.comportamiento(plataformas, PANTALLA, jugador)
         self.animar_movimiento(PANTALLA)
 
@@ -55,11 +57,11 @@ class Enemigo(Personaje):
                 self.mirando_izq = False    
             
             if self.rectangulos["principal"].colliderect(jugador.rectangulos["principal"]):
-                self.que_hace = 1
+                self.que_hace = "attack"
                 
             
         else:
-            self.que_hace = 0
+            self.que_hace = "run"
 
 
 

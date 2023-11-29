@@ -14,9 +14,10 @@ class Plataforma(Entidades_Juego):
         plataforma = {}
         if visible:
             img = pygame.image.load(path)
-            img_res = pygame.transform.scale(img, (50,50))
+            img_res = pygame.transform.scale(img, (50,tamaño[1]))
             plataforma["superficie"] = pygame.Surface(tamaño)
             repeticiones = int(tamaño[0] / 50)
+
             for i in range(repeticiones):
                 plataforma["superficie"].blit(img_res,(50 * i,0))
 

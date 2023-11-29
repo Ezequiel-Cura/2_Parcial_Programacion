@@ -10,7 +10,7 @@ class Necromancer(Enemigo):
         super().__init__(posicion, list_animaciones, velocidad, tamaño)
 
     def update(self, PANTALLA, plataformas, jugador, lista_enemigos):
-        self.aplicar_gravedad()
+        self.aplicar_gravedad(PANTALLA)
         self.verificar_colision_piso(plataformas)
         self.comportamiento(plataformas,PANTALLA, jugador)
         self.creacion_enemigos(lista_enemigos, PANTALLA)
@@ -20,11 +20,11 @@ class Necromancer(Enemigo):
         
         if self.delay_creacion:
             pygame.time.set_timer(pygame.USEREVENT + 5 , 15000, 1)
-            self.que_hace = 1
+            self.que_hace = "revive"
             self.delay_creacion = False
             for i in range(5):
                 random_x = random.randint(20, pantalla.get_width() -20)
-                enemig = Enemigo((random_x,0), skeleton_animation, 3, (50,70))
+                enemig = Enemigo((random_x,0), dicc_animations_skeleton, 3, (50,70))
                 lista_enemigos.append(enemig)
         else:
-            self.que_hace = 0
+            self.que_hace = "run"

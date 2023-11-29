@@ -51,17 +51,6 @@ personaje_ataque = [
     pygame.image.load(r"Assets\Images\Personaje\Attack\3.png"),
     pygame.image.load(r"Assets\Images\Personaje\Attack\4.png"),
     pygame.image.load(r"Assets\Images\Personaje\Attack\5.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\6.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\7.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\8.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\9.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\10.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\11.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\12.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\13.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\14.png"),
-    pygame.image.load(r"Assets\Images\Personaje\Attack\15.png"),
-
 ]
 
 dicc_animaciones_personaje = {
@@ -139,7 +128,8 @@ skeleton_attack = [
 ]
 
 dicc_animations_skeleton = {
-    ""
+    "run": skeleton_move,
+    "attack": skeleton_attack
 }
 
 skeleton_animation = [skeleton_move, skeleton_attack]

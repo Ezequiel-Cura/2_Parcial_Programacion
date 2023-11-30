@@ -20,7 +20,7 @@ class Enemigo(Personaje):
         width_rectangulo = self.rectangulos["principal"].width
         recta_proximidad = pygame.Rect(self.rectangulos["principal"].x - width_rectangulo * 3, 
                                        self.rectangulos["principal"].y,
-                                       width_rectangulo * 6,
+                                       width_rectangulo * 10,
                                        self.rectangulos["principal"].height)
         # pygame.draw.rect(pantalla, "lightblue", recta_proximidad, 3)
         # self.verificar_colision_piso(plataformas)

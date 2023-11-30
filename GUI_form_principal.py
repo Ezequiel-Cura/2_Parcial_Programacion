@@ -11,6 +11,7 @@ from GUI_form_menu_score import *
 from GUI_form_config import Config_menu
 from GUI_form_niveles import Menu_niveles
 
+from mod_archivos import *
 
     
 class FormPrincipal(Form):
@@ -99,10 +100,7 @@ class FormPrincipal(Form):
 
     
     def btn_tabla_click(self, param):
-        diccionario = [{"Jugador": "Mario", "Score": 100},
-                      {"Jugador": "Mario", "Score": 100},
-                      {"Jugador": "Mario", "Score": 100},
-                      ]
+        diccionario = lectura_csv_puntaje()
         leaderboard_menu = FormMenuScore(screen=self._master,
                                     x = 500,
                                     y = 100,

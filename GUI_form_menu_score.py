@@ -13,7 +13,7 @@ class FormMenuScore(Form):
         aux_image = pygame.transform.scale(aux_image,(w,h))
         self._slave = aux_image
         self._score = scoreboard
- 
+        
 
         self._margen_y = margen_y
         #Creo 2 labels y los agrego a la lista de widgets

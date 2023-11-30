@@ -37,8 +37,8 @@ class Game(Config):
                     self.running = False
                 if event.type == py.K_m:
                     cambiar_modo()
-                # if event.type == py.MOUSEBUTTONDOWN:
-                #     print(event.pos)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    print(event.pos)
                 
             # self.fill_screen()
             self.SCREEN.blit(self.background_image,(0,0))

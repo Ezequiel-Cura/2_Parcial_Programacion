@@ -82,11 +82,11 @@ def lectura_json(propiedad:str= "" , objeto_total:bool=False):
     
 # ----------------------- CSV PUNTAJE JUGADOR------------------------------------------
 
-def escritura_csv_puntaje(nombre, puntaje, nivel):
+def escritura_csv_puntaje(nombre, puntaje, nivel,tipo):
    
     try:
         with open("Puntaje_jugador.csv", "a") as archivo:
-            log_info = f"{nombre},{puntaje},{nivel}\n"
+            log_info = f"{nombre},{puntaje},{nivel},{tipo}\n"
             archivo.write(log_info)
 
 
@@ -95,7 +95,7 @@ def escritura_csv_puntaje(nombre, puntaje, nivel):
         print(f"An error occurred at escritura_json: {argument}")
         
 
-def lectura_csv_puntaje(propiedad:str= "" , objeto_total:bool=False):
+def lectura_csv_puntaje():
   
     try:
         with open("Puntaje_jugador.csv", "r") as archivo:
@@ -106,8 +106,12 @@ def lectura_csv_puntaje(propiedad:str= "" , objeto_total:bool=False):
                 jugador["nombre"] = registro[0]
                 jugador["puntaje"] = registro[1]
                 jugador["nivel"] = registro[2]
-
+                jugador["tipo"] = registro[3]
                 puntaje_log.append(jugador)
+           
+            print(puntaje_log)
+            puntaje_log = sorted(puntaje_log,key=lambda x: int(x["puntaje"]), reverse=True)
+            print(puntaje_log)
         return puntaje_log
       
     except Exception as argument:

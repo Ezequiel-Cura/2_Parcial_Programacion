@@ -1,6 +1,7 @@
 import pygame
 
 from Classes.Characters.Entidades import Entidades_Juego
+from Classes.Characters.Items import Items
 
 
 class Personaje(Entidades_Juego):
@@ -103,14 +104,22 @@ class Personaje(Entidades_Juego):
  
 
 
-    def verificar_colision_items(self, lista_items, puntaje):
+    def verificar_colision_items(self, lista_items:list[Items], puntaje,jugador):
+
         for item in lista_items:
             if self.rectangulos["principal"].colliderect(item.rectangulos["principal"]):
-                print("RECOMPENSA")
-                self.puntaje += 10
-                ref_item = item
-                lista_items.remove(item)
-                del ref_item
+                if item.is_health == True:
+                    jugador.vidas += 1
+                    ref_item = item
+                    lista_items.remove(item)
+                    del ref_item
+                else:
+                    self.puntaje += 10
+                    ref_item = item
+                    lista_items.remove(item)
+                    del ref_item
+       
+                
 
     def lanzar_proyectil(self, objetivo):# Objetivo es el personaje?
         pass

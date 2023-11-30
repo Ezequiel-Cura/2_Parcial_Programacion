@@ -51,7 +51,13 @@ class Nivel(Form):
         #PLATAFORMAS & RECOMPENSAS
         self.lista_plataformas:list[Plataforma] = lista_plataformas
         self.lista_recompensas = []
+        self.lista_vidas = []
         self.generar_recompensa_aleatoria(self.lista_plataformas)
+        self.generar_vida_aleatoria(self.lista_plataformas)
+        self.hay_item_vida = False
+
+        self.count_creacion_vidas = 0
+        self.limit_creacione_vidas = 3
 
         self.vidas_texto = self.fuente.render(f"{self.jugador.vidas}", False, "black", None)
         self.tiempo_texto = f"{self._tiempo}"
@@ -74,14 +80,28 @@ class Nivel(Form):
                 self.lista_enemigos.append(enemig)
 
         elif nivel == 3:
-            self.boss = Boss((500,500),dicc_animations_boss,4,(350, 400))
+            self.boss = Boss((1700,500),dicc_animations_boss,4,(350, 400))
 
     def generar_recompensa_aleatoria(self, lista_plataformas:list[Plataforma]):
         for plat in lista_plataformas:
             x = plat.rectangulos["top"].midtop[0]
             y = plat.rectangulos["top"].midtop[1] - 40
-            nueva_recompensa = Items((30,30),(x,y),coin_animation)
+            nueva_recompensa = Items((30,30),(x,y),coin_animation,False)
             self.lista_recompensas.append(nueva_recompensa)
+
+    def generar_vida_aleatoria(self, lista_plataformas:list[Plataforma]):
+        random_index = random.randint(0, len(lista_plataformas) - 1)
+        for plat in lista_plataformas:
+            if plat.index == random_index:
+                self.count_creacion_vidas += 1
+                x = plat.rectangulos["top"].midtop[0] - 30
+                y = plat.rectangulos["top"].midtop[1] - 40
+                nueva_recompensa = Items((30,30),(x,y),heart_item,True)
+                self.lista_vidas.append(nueva_recompensa)
+                self.hay_item_vida = True
+                print("enter")
+                
+                
         
     def set_recompensas(self, pantalla):
         self.puntaje_nivel = self.jugador.puntaje
@@ -115,9 +135,14 @@ class Nivel(Form):
             self.perdio = True
 
     def verificar_win(self):
-        if len(self.lista_recompensas) == 0 and len(self.lista_enemigos) == 0:
-            self.gano = True
-            self.game_over = True
+        if self.nivel_actual == 3:
+            if self.boss.defeated == True:
+                self.gano = True
+                self.game_over = True
+        else:    
+            if len(self.lista_recompensas) == 0 and len(self.lista_enemigos) == 0:
+                self.gano = True
+                self.game_over = True
     
 
         
@@ -145,6 +170,13 @@ class Nivel(Form):
                     self.boss.mover_boss = True
             elif evento.type == pygame.USEREVENT + 7:
                 self.jugador.ataco = False
+            elif evento.type == pygame.USEREVENT + 8:
+                if self.boss != None:
+                    self.boss.dash_attack_wait = True
+                    self.boss.dash_attack = True
+            elif evento.type == pygame.USEREVENT + 9:
+                if self.boss != None:
+                    self.boss.boss_inmune = False
 
         self.name = name
         if self.game_over:
@@ -157,7 +189,7 @@ class Nivel(Form):
                 self._slave.blit(texto_perdio, (self._slave.get_width() / 2,self._slave.get_height() / 2))
 
                 if self.escribir_archivo:
-                    escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual)
+                    escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual, "Loss")
                     self.escribir_archivo = False
                 
                 self.que_hacer = "Menu"
@@ -170,7 +202,7 @@ class Nivel(Form):
                 if self.escribir_archivo:
                     self.escribir_archivo = False
                     self.puntaje_nivel += self._tiempo * 100
-                    escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual)
+                    escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual,"Win")
 
                 #Pasar al siguiente nivel
                 self.que_hacer = "Siguiente Nivel"
@@ -202,19 +234,28 @@ class Nivel(Form):
         self.set_vidas(self._slave) # bliteamos vidas
         self.set_recompensas(self._slave) #bliteamos recompensas
 
+        if len(self.lista_vidas) <= 0:
+            self.hay_item_vida = False
+
+        # print(self.lista_vidas)
+
+        if len(self.lista_vidas) == 0 and self.count_creacion_vidas <= 3:
+            
+            self.generar_vida_aleatoria(self.lista_plataformas)
+
         for plataforma in self.lista_plataformas:
             plataforma.draw(self._slave) # dibujamos platafromas
 
         #bliteamos personaje y lo actualizamos
-        self.jugador.update(self._slave, self.lista_plataformas, self.lista_enemigos, self.lista_recompensas,self.puntaje_nivel)
-        # self.jugador.verificar_colision_enemigo(self.lista_enemigos)
-        # self.jugador.verificar_colision_items(self.lista_recompensas, self.puntaje_nivel)
-        # self.jugador.animar_movimiento(self._slave)
+        self.jugador.update(self._slave, self.lista_plataformas, self.lista_enemigos, self.lista_recompensas ,self.puntaje_nivel,self.lista_vidas)
+      
 
         for item in self.lista_recompensas:
             item.update(self._slave)
             
- 
+        for item in self.lista_vidas:
+            item.update(self._slave)
+
         for bullet in self.lista_bullets:
             if bullet.eliminar:
                 ref_bullet = bullet
@@ -227,6 +268,14 @@ class Nivel(Form):
                     self.necromancer = None
                     del ref_necro
                     bullet.eliminar = True
+            
+            if self.boss != None:
+                if bullet.rectangulos["principal"].colliderect(self.boss.rectangulos["principal"]):
+                    if self.boss.boss_inmune == False:
+                        self.boss.boss_inmune = True
+                        self.boss.health -= 1
+                        bullet.eliminar = True
+                        pygame.time.set_timer(pygame.USEREVENT + 9, 1000, 1)
 
             bullet.verificar_colision_enemigos(self.lista_enemigos)
             bullet.update(self._slave, self.lista_plataformas)
@@ -242,6 +291,8 @@ class Nivel(Form):
             enem.update(self._slave, self.lista_plataformas, self.jugador)
 
         self.dibujar_rectangulos()
+
+
 
     # ACTUALIZAR QUE HACE EL PERSONAJE PRINCIPAL CON LAS TECLAS
     def leer_inputs(self):
@@ -288,9 +339,9 @@ class Nivel(Form):
             y = self.jugador.rectangulos["principal"].midtop[1] + 5
             
             if self.jugador.mirando_izq:
-                nuevo_proyectil = Proyectiles((50,50), (x,y),  -1)
+                nuevo_proyectil = Proyectiles((50,50), (x,y),True,proyectil_animation)
             else:
-                nuevo_proyectil = Proyectiles((50,50), (x, y),  1)
+                nuevo_proyectil = Proyectiles((50,50), (x, y),False,proyectil_animation)
 
             self.lista_bullets.append(nuevo_proyectil)
         
@@ -317,8 +368,7 @@ class Nivel(Form):
                     pygame.draw.rect(self._slave,"Orange", self.necromancer.rectangulos[rect],2)
 
             if self.boss != None:
-                for rect in self.boss.rectangulos:
-                    pygame.draw.rect(self._slave,"red", self.boss.rectangulos[rect],2)
+                pygame.draw.rect(self._slave, "red", self.boss.rectangulos["principal"],3)
 
             for enemi in self.lista_enemigos:
                 for lados in enemi.rectangulos:

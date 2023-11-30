@@ -2,12 +2,14 @@ import pygame
 from Classes.Characters.Entidades import Entidades_Juego
 
 class Plataforma(Entidades_Juego):
-    def __init__(self, tamaño, posicion, es_visible = False, path = "", es_pared = False):
+    def __init__(self, tamaño, posicion, es_visible = False, path = "", es_pared = False, index = 0):
         self.es_visible = es_visible
         self.plataforma = Plataforma.crear_plataforma(es_visible, False, tamaño, posicion, path)
         self.rectangulos = Entidades_Juego.obtener_rectangulos(self.plataforma["rectangulo"], self.plataforma["rectangulo"].width, self.plataforma["rectangulo"].height)
         # super().__init__(tamaño, posicion,[])
         self.rects_limites = self.crear_limites_plataformas()
+        self.index = index
+        self.fuego_rect = self.crear_rect_fuego()
 
     @staticmethod
     def crear_plataforma(visible,esPremio, tamaño,posicion, path=""):
@@ -49,3 +51,10 @@ class Plataforma(Entidades_Juego):
             "rect_der": rect_der
         }
         return dicc_rects
+    
+    def crear_rect_fuego(self):
+        rect_fuego = pygame.Rect(self.rectangulos["principal"].topleft[0], 
+                               self.rectangulos["principal"].topleft[1] - 10,
+                                self.rectangulos["principal"].width,
+                                10)
+        return rect_fuego

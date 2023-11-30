@@ -65,9 +65,9 @@ class Entidades_Juego:
 
 
     def animar_movimiento(self, pantalla):
-        # self.animacion_actual = self.list_animaciones[self.que_hace]
+
         self.count += 1
-        print(self.que_hace,"---------")
+        
         if self.count > self.limit_count:
             self.pasos_animacion += 1
             self.count = 0
@@ -76,7 +76,6 @@ class Entidades_Juego:
             self.pasos_animacion = 0
 
         if self.mirando_izq == True:
-            # nueva_lista = Entidades_Juego.rotar_imagen(self.animacion_actual[int(self.pasos_animacion)])
             pantalla.blit( pygame.transform.flip(self.animacion_actual[int(self.pasos_animacion)],True,False), (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))
         else:
             pantalla.blit(self.animacion_actual[int(self.pasos_animacion)], (self.rectangulos["principal"].x , self.rectangulos["principal"].y ))

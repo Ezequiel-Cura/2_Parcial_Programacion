@@ -1,5 +1,5 @@
 import pygame
-
+from Classes.Characters.Entidades import Entidades_Juego
 
 # Imagenes personaje principal----------------------------------------------------
 
@@ -252,14 +252,47 @@ boss_death = [
     pygame.image.load(r"Assets\Images\Boss\death\death_10.png"),
     pygame.image.load(r"Assets\Images\Boss\death\death_11.png"),
 ]
+boss_dash = [
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_1.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_2.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_3.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_4.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_5.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_6.png"),
+    pygame.image.load(r"Assets\Images\Boss\1atk\1atk_7.png"),
+]
 
 dicc_animations_boss = {
     "idle": boss_idle,
     "run": boss_move,
-    "fly": boss_fly
+    "fly": boss_fly,
+    "dash": boss_dash,
+    "death": boss_death
 }
 
 boss_animation = [boss_idle, boss_move, boss_fly, boss_attack1, boss_attack2]
+
+boss_proyectile = [
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-13.png"),
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-14.png"),
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-15.png"),
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-16.png"),
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-17.png"),
+    pygame.image.load(r"Assets\Images\Bullet\Boss bullet\PixelartFireBall-18.png"),
+]
+
+boss_fire = [
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_1.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_2.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_3.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_4.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_5.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_6.png"),
+    pygame.image.load(r"Assets\Images\Items\Fire\burning_loop_7.png"),
+
+]
+
+boss_fire = Entidades_Juego.reescalalar_imagenesa(boss_fire, 50,60)
 
 # Items ----------------------------------------------------------------
 coin_animation = [
@@ -270,6 +303,13 @@ coin_animation = [
     pygame.image.load(r"Assets\Images\Items\Coin\5.png"),
     pygame.image.load(r"Assets\Images\Items\Coin\6.png"),
 ]
+
+heart_item = [
+    pygame.image.load(r"Assets\Images\Items\Heart.png"),
+    pygame.image.load(r"Assets\Images\Items\Heart.png"),
+    pygame.image.load(r"Assets\Images\Items\Heart.png"),
+]
+
 
 hp_surface = pygame.image.load(r"Assets\Images\Items\0.png")
 hp_surface = pygame.transform.scale(hp_surface, ( 50,50))

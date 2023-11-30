@@ -25,19 +25,19 @@ class PersonajePrincipal(Personaje):
                     self.inmune = True
                     self.vidas -= 1
         
-    def update(self, PANTALLA, plataformas, lista_enemigos, lista_recompensas, puntaje):
+    def update(self, PANTALLA, plataformas, lista_enemigos, lista_recompensas, puntaje, lista_vidas):
         
         
 
         if self.que_hace == "idle" and not self.esta_aire:
             if not self.esta_aire:
-                print("idle")
+              
                 self.limit_count = 5
                 self.animacion_actual = self.animaciones["idle"]
 
                 
         if self.que_hace == "run" or self.movimiento_aereo:
-                print("run")
+               
                 if not self.esta_aire:
                     self.limit_count = 5
                     self.animacion_actual = self.animaciones["run"]
@@ -46,24 +46,27 @@ class PersonajePrincipal(Personaje):
         if self.que_hace == "jump":
                 self.limit_count = 20
                 self.animacion_actual = self.animaciones["jump"]
-                print("juump")
+               
                 self.saltar(plataformas)
 
 
         if self.que_hace == "attack" or self.ataco :
             if not self.esta_aire:
-                print("attack")
+               
                 self.limit_count = 15
                 self.animacion_actual = self.animaciones["attack"]
                 self.attack(PANTALLA, lista_enemigos)
 
+ 
 
         self.animar_movimiento(PANTALLA)
         self.aplicar_gravedad(PANTALLA)
         self.verificar_colision_piso(plataformas)
         self.verificar_colision_pared(plataformas)    
         self.verificar_colision_enemigo(lista_enemigos)
-        self.verificar_colision_items(lista_recompensas, puntaje)
+        self.verificar_colision_items(lista_recompensas, puntaje, self)
+        self.verificar_colision_items(lista_vidas, puntaje, self)
+
 
     def verificar_accion(self, que_hizo):
         pass

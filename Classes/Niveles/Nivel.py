@@ -190,7 +190,7 @@ class Nivel(Form):
                 self._slave.blit(texto_perdio, (self._slave.get_width() / 2,self._slave.get_height() / 2))
 
                 if self.escribir_archivo:
-                    lose_audio.play(loops=1)
+                    lose_audio.play(loops=0)
                     escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual, "Loss")
                     self.escribir_archivo = False
                 
@@ -202,7 +202,7 @@ class Nivel(Form):
                 self._slave.blit(texto_perdio, (self._slave.get_width() / 2,self._slave.get_height() / 2))
 
                 if self.escribir_archivo:
-                    victory_audio.play(loops=1)
+                    victory_audio.play(loops=0)
                     self.escribir_archivo = False
                     self.puntaje_nivel += self._tiempo * 100
                     escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual,"Win")

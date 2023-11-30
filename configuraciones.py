@@ -369,3 +369,5 @@ level_3_music = pygame.mixer.Sound(r"Assets\Music\lvl3music.mp3")
 
 
 
+sonido_off = pygame.image.load(r"Assets\UI\sonido_off.png")
+sonido_on = pygame.image.load(r"Assets\UI\sonido_on.png")

@@ -4,7 +4,7 @@ from UI.GUI_button_image import *
 from UI.GUI_form import *
 from manejador_niveles import Manejador_niveles
 from Classes.Niveles.Nivel_2 import Nivel_2
-
+from configuraciones import *
 
 class FormContenedorNivel(Form):
     def __init__(self, screen:pygame.Surface, nivel,name):
@@ -13,8 +13,10 @@ class FormContenedorNivel(Form):
         nivel._slave = self._slave
         self.nivel = nivel
         self.pause_game_var = False
-
+        level_3_music.stop()
+        music_ambiental_menu.play()
         self.puntaje_niveles = 0
+        
 
         #Crear boton home
         self.boton_home = Button_Image(screen=self._slave,
@@ -72,3 +74,4 @@ class FormContenedorNivel(Form):
     def btn_home_click(self,parametro):
         self.end_dialog()
     
+ 

@@ -11,6 +11,7 @@ from GUI_form_menu_score import *
 from GUI_form_config import Config_menu
 from GUI_form_niveles import Menu_niveles
 
+from configuraciones import *
 from mod_archivos import *
 
     
@@ -22,10 +23,7 @@ class FormPrincipal(Form):
         self.volumen = 0.2
 
         pygame.mixer.init()
-        pygame.mixer.music.load(r"Assets\Music\Ambient 1.mp3")
-        pygame.mixer.music.set_volume(self.volumen)
-        pygame.mixer.music.play(-1)
-
+        music_ambiental_menu.play()
         
         ##COMPLETAR
 

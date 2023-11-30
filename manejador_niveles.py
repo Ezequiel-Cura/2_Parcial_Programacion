@@ -7,6 +7,8 @@ from Classes.Niveles.Nivel_3 import Nivel_3
 
 class Manejador_niveles:
     def __init__(self, pantalla) -> None:
+        
+        
 
         self._slave = pantalla
         self.niveles = {

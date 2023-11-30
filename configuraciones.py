@@ -353,8 +353,16 @@ lose_audio = pygame.mixer.Sound(r"Assets\Music\Death.ogg")
 
 victory_audio = pygame.mixer.Sound(r"Assets\Music\Victory.ogg")
 
+music_ambiental_menu = pygame.mixer.Sound(r"Assets\Music\Ambient 1.mp3")
 
+jump_audio = pygame.mixer.Sound(r"Assets\Music\30_Jump_03.wav")
+attack_audio = pygame.mixer.Sound(r"Assets\Music\slash.mp3")
+heal_audio = pygame.mixer.Sound(r"Assets\Music\02_Heal_02.wav")
+fire_explosion_audio = pygame.mixer.Sound(r"Assets\Music\04_Fire_explosion_04_medium.wav")
+coin_audio = pygame.mixer.Sound(r"Assets\Music\coin.mp3")
+fly_audio = pygame.mixer.Sound(r"Assets\Music\flying.mp3")
 
+level_3_music = pygame.mixer.Sound(r"Assets\Music\lvl3music.mp3")
 
 
 

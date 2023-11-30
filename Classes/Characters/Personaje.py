@@ -2,7 +2,7 @@ import pygame
 
 from Classes.Characters.Entidades import Entidades_Juego
 from Classes.Characters.Items import Items
-
+from configuraciones import *
 
 class Personaje(Entidades_Juego):
     def __init__(self,velocidad, potencia_salto, tamaño, posicion, animaciones):
@@ -96,6 +96,7 @@ class Personaje(Entidades_Juego):
         for ene in lista_objetivo:
             if self.rect_attack.colliderect(ene.rectangulos["principal"]):
                 ref_ene = ene
+                
                 lista_objetivo.remove(ene)
                 del ref_ene
 
@@ -108,12 +109,14 @@ class Personaje(Entidades_Juego):
 
         for item in lista_items:
             if self.rectangulos["principal"].colliderect(item.rectangulos["principal"]):
-                if item.is_health == True:
+                if item.is_health == True:  
+                    heal_audio.play(loops=0)
                     jugador.vidas += 1
                     ref_item = item
                     lista_items.remove(item)
                     del ref_item
                 else:
+                    coin_audio.play(loops=0)
                     self.puntaje += 10
                     ref_item = item
                     lista_items.remove(item)

@@ -63,6 +63,7 @@ class Boss(Enemigo):
         
             if self.que_hace == "fly":
                 self.limit_count = 5
+                # fly_audio.play(loops=0)
                 self.animacion_actual = self.animaciones["fly"]
 
             if self.que_hace == "dash":
@@ -111,9 +112,10 @@ class Boss(Enemigo):
                 pygame.time.set_timer(pygame.USEREVENT + 8, 5000,1 )
         
 
-
+       
 
         if self.dash_attack:
+            fly_audio.stop()
 
             if self.dash_rect.centery > self.rectangulos["principal"].centery:
                 self.rectangulos["principal"].y += 10
@@ -163,7 +165,7 @@ class Boss(Enemigo):
            
 
         if self.fire_attack:
-
+            
             self.fire_attack = False
             self.plat_elegidas = []
 

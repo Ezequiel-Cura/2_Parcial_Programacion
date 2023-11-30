@@ -10,6 +10,7 @@ from UI.GUI_button_image import *
 from manejador_niveles import Manejador_niveles
 
 from GUI_form_contenedor_nivel import FormContenedorNivel
+from configuraciones import *
 
 class Menu_niveles(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
@@ -17,6 +18,8 @@ class Menu_niveles(Form):
         self.name = ""
         self.manejador_niveles = Manejador_niveles(self._master)
         self.num_nivel = 1
+
+        
 
         self.label_nombre = Label(self._slave, 50,0, 100, 50, "Insert name","Comic Sans MS",15, "black",r"Assets\UI\Table.png")
 
@@ -107,3 +110,12 @@ class Menu_niveles(Form):
     def btn_home_click(self,parametro):
         self.end_dialog()
     
+    def iniciar_musica_nivel(self):
+        music_ambiental_menu.stop()
+        if self.num_nivel == 1:
+            pass
+        elif self.num_nivel ==2:
+            pass
+        elif self.num_nivel == 3:
+            level_3_music.play()
+            print("lbl3")

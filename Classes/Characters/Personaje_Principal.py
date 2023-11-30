@@ -1,6 +1,6 @@
 from Classes.Characters.Personaje import Personaje
 import pygame
-
+from configuraciones import *
 class PersonajePrincipal(Personaje):
     def __init__(self, tamaño, posicion, animaciones):
         velocidad = 5
@@ -46,16 +46,17 @@ class PersonajePrincipal(Personaje):
         if self.que_hace == "jump":
                 self.limit_count = 20
                 self.animacion_actual = self.animaciones["jump"]
-               
+                jump_audio.play(loops=0)
                 self.saltar(plataformas)
 
 
         if self.que_hace == "attack" or self.ataco :
             if not self.esta_aire:
-               
+                print("hola")
                 self.limit_count = 15
                 self.animacion_actual = self.animaciones["attack"]
                 self.attack(PANTALLA, lista_enemigos)
+                
 
  
 

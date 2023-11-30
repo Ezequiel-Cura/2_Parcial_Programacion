@@ -8,7 +8,7 @@ from UI.GUI_label import *
 from UI.GUI_form import *
 from UI.GUI_button_image import *
 from GUI_form_menu_score import *
-
+from configuraciones import *
 
 
 class Config_menu(Form):
@@ -84,4 +84,5 @@ class Config_menu(Form):
         self.label_volumen.update(lista_eventos)
         self.label_volumen.set_text(f"{round(self.volumen * 100)}%")
         pygame.mixer.music.set_volume(self.volumen)
+        music_ambiental_menu.set_volume(self.volumen)
         

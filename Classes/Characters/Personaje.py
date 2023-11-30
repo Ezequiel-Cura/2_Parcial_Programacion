@@ -99,11 +99,7 @@ class Personaje(Entidades_Juego):
                 
                 lista_objetivo.remove(ene)
                 del ref_ene
-
         # pygame.draw.rect(pantalla,"red" ,self.rect_attack)
-
- 
-
 
     def verificar_colision_items(self, lista_items:list[Items], puntaje,jugador):
 
@@ -122,7 +118,3 @@ class Personaje(Entidades_Juego):
                     lista_items.remove(item)
                     del ref_item
        
-                
-
-    def lanzar_proyectil(self, objetivo):# Objetivo es el personaje?
-        pass

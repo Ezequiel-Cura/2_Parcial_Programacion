@@ -28,16 +28,12 @@ class PersonajePrincipal(Personaje):
     def update(self, PANTALLA, plataformas, lista_enemigos, lista_recompensas, puntaje, lista_vidas):
         
         
-
         if self.que_hace == "idle" and not self.esta_aire:
             if not self.esta_aire:
-              
                 self.limit_count = 5
                 self.animacion_actual = self.animaciones["idle"]
 
-                
         if self.que_hace == "run" or self.movimiento_aereo:
-               
                 if not self.esta_aire:
                     self.limit_count = 5
                     self.animacion_actual = self.animaciones["run"]
@@ -49,16 +45,11 @@ class PersonajePrincipal(Personaje):
                 jump_audio.play(loops=0)
                 self.saltar(plataformas)
 
-
         if self.que_hace == "attack" or self.ataco :
             if not self.esta_aire:
-                print("hola")
                 self.limit_count = 15
                 self.animacion_actual = self.animaciones["attack"]
                 self.attack(PANTALLA, lista_enemigos)
-                
-
- 
 
         self.animar_movimiento(PANTALLA)
         self.aplicar_gravedad(PANTALLA)
@@ -68,9 +59,3 @@ class PersonajePrincipal(Personaje):
         self.verificar_colision_items(lista_recompensas, puntaje, self)
         self.verificar_colision_items(lista_vidas, puntaje, self)
 
-
-    def verificar_accion(self, que_hizo):
-        pass
-
-    def verificar_eventos_personaje():
-        pass

@@ -40,8 +40,6 @@ class Nivel(Form):
         self.jugador:PersonajePrincipal = personaje_principal
         self.lista_bullets:list[Proyectiles] = []
 
-        
-    
         #ENEMIGOS
         self.boss = None
         self.necromancer = None
@@ -56,6 +54,7 @@ class Nivel(Form):
         self.generar_vida_aleatoria(self.lista_plataformas)
         self.hay_item_vida = False
 
+
         self.count_creacion_vidas = 0
         self.limit_creacione_vidas = 3
 
@@ -66,7 +65,7 @@ class Nivel(Form):
     
 
     def generar_enemigo_aleatorio(self, nivel:int):
-
+        #Genero enemigos que caen del cielo, segun el nivel
         if nivel == 1:
             for i in range(10):
                 random_x = random.randint(20, self._slave.get_width() -20)
@@ -83,6 +82,7 @@ class Nivel(Form):
         elif nivel == 3:
             self.boss = Boss((1700,500),dicc_animations_boss,4,(350, 400))
 
+    #Genera monedas en cada plataforma
     def generar_recompensa_aleatoria(self, lista_plataformas:list[Plataforma]):
         for plat in lista_plataformas:
             x = plat.rectangulos["top"].midtop[0]
@@ -90,6 +90,7 @@ class Nivel(Form):
             nueva_recompensa = Items((30,30),(x,y),coin_animation,False)
             self.lista_recompensas.append(nueva_recompensa)
 
+    #Genera una vida en una plataforma aleatoria
     def generar_vida_aleatoria(self, lista_plataformas:list[Plataforma]):
         random_index = random.randint(0, len(lista_plataformas) - 1)
         for plat in lista_plataformas:
@@ -103,7 +104,7 @@ class Nivel(Form):
                 print("enter")
                 
                 
-        
+        #muestra el puntaje en la pantalla
     def set_recompensas(self, pantalla):
         self.puntaje_nivel = self.jugador.puntaje
         self.puntaje_nivel_texto = self.fuente.render(f"Points: {self.puntaje_nivel}", False, "white", None)
@@ -111,7 +112,7 @@ class Nivel(Form):
         pantalla.blit(self.puntaje_nivel_texto, (1000, 0))
 
     def set_tiempo(self, pantalla):
-       
+       #muestra el tiempo
         tiempo2 = pygame.time.get_ticks()
 
         if tiempo2 > self.tiempo1 + 1000:
@@ -123,18 +124,20 @@ class Nivel(Form):
         pantalla.blit(self.tiempo_texto, (1500, 0))
 
     def set_vidas(self, pantalla):
+        #muestra las vidas
         x = 60
         pantalla.blit(hp_surface,(30,10))
         for i in range(self.jugador.vidas):
             x += 20
             pantalla.blit(heart_img,(x,10))
 
-
+    #verifica si perdio
     def verificar_game_over(self):
         if self.jugador.vidas <= 0 or self._tiempo <= 0:
             self.game_over = True
             self.perdio = True
 
+    #verifica si gano
     def verificar_win(self):
         if self.nivel_actual == 3:
             if self.boss.defeated == True:
@@ -182,15 +185,15 @@ class Nivel(Form):
         self.name = name
         if self.game_over:
             # Aca deberia guardarme el puntaje y todo eso
-            #tambien deberia llamar un timer o algo para poder mostrar por unos segundos un texto
+            #tambien deberia llamar un timer o algo para poder mostrar por unos segundos un texto y despues volver a menu
             # diciendo si perdio o gano
             if self.perdio:
 
                 texto_perdio = self.fuente_grande.render("YOU LOST", False, "white", "black")
                 self._slave.blit(texto_perdio, (self._slave.get_width() / 2,self._slave.get_height() / 2))
 
-                if self.escribir_archivo:
-                    lose_audio.play(loops=0)
+                if self.escribir_archivo: # escribo en el archivo el puntaje
+                    lose_audio.play(loops=0) 
                     escritura_csv_puntaje(self.name,self.puntaje_nivel, self.nivel_actual, "Loss")
                     self.escribir_archivo = False
                 
@@ -243,8 +246,7 @@ class Nivel(Form):
         # print(self.lista_vidas)
 
         if len(self.lista_vidas) == 0 and self.count_creacion_vidas <= 3:
-            
-            self.generar_vida_aleatoria(self.lista_plataformas)
+            self.generar_vida_aleatoria(self.lista_plataformas) # genera la vida aleatoria
 
         for plataforma in self.lista_plataformas:
             plataforma.draw(self._slave) # dibujamos platafromas
@@ -254,12 +256,12 @@ class Nivel(Form):
       
 
         for item in self.lista_recompensas:
-            item.update(self._slave)
+            item.update(self._slave) # actualizamos items
             
         for item in self.lista_vidas:
-            item.update(self._slave)
+            item.update(self._slave)# actualizamos vidas
 
-        for bullet in self.lista_bullets:
+        for bullet in self.lista_bullets: # actualizamos bullets y si collisionarion contra enemigos
             if bullet.eliminar:
                 ref_bullet = bullet
                 self.lista_bullets.remove(bullet)
@@ -350,7 +352,7 @@ class Nivel(Form):
         
 
         
-    
+    # modo debug
     def dibujar_rectangulos(self):
         if obtener_modo() == True:  
             

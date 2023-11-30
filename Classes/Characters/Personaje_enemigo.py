@@ -30,19 +30,18 @@ class Enemigo(Personaje):
 
             for rect in self.rectangulos:
                 if self.mirando_izq:
-                    # nueva_vel *= -1
                     self.rectangulos[rect].x -= nueva_vel
                 else:
-                # self.rectangulos["left"].x += nueva_vel
                     self.rectangulos[rect].x += nueva_vel
 
             for plat in plataformas:
-
+                #colision limites de plataforma
                 if self.rectangulos["principal"].colliderect(plat.rects_limites["rect_der"]):
                     self.mirando_izq = True
                 if self.rectangulos["principal"].colliderect(plat.rects_limites["rect_izq"]):
                     self.mirando_izq = False
 
+                #colision paredes
                 if self.rectangulos["principal"].colliderect(plat.rectangulos["left"]):
                     self.mirando_izq = True
                 if self.rectangulos["principal"].colliderect(plat.rectangulos["right"]):
@@ -58,16 +57,6 @@ class Enemigo(Personaje):
             
             if self.rectangulos["principal"].colliderect(jugador.rectangulos["principal"]):
                 self.que_hace = "attack"
-                
-            
+                 
         else:
             self.que_hace = "run"
-
-
-
-
-
-    # def caer_libre(self):
-    #     if self.esta_saltando == True:
-    #         for rect in self.rectangulos:
-    #             self.rectangulos[rect].y += 3

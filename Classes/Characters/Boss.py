@@ -126,7 +126,6 @@ class Boss(Enemigo):
             if self.rectangulos["principal"].centery > self.dash_rect.top + 50 and self.rectangulos["principal"].centery < self.dash_rect.bottom - 50:
                 #que se mueva hacia el jugador
                 if self.rectangulos["principal"].x > 100 and self.dash_limit == False:
-
                     self.que_hace = "dash"
                     self.rectangulos["principal"].x -= 20
                     if self.rectangulos["principal"].colliderect(jugador.rectangulos["principal"]):

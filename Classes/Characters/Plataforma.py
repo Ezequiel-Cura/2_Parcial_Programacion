@@ -23,8 +23,6 @@ class Plataforma(Entidades_Juego):
             for i in range(repeticiones):
                 plataforma["superficie"].blit(img_res,(50 * i,0))
 
-            # plataforma["superficie"] = pygame.image.load(path)
-            # plataforma["superficie"] = pygame.transform.scale(plataforma["superficie"],tamaño)
         else:
             plataforma["superficie"] = pygame.Surface(tamaño)
         plataforma["rectangulo"] = plataforma["superficie"].get_rect()

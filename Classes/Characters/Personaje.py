@@ -95,10 +95,10 @@ class Personaje(Entidades_Juego):
 
         for ene in lista_objetivo:
             if self.rect_attack.colliderect(ene.rectangulos["principal"]):
-                ref_ene = ene
-                
-                lista_objetivo.remove(ene)
-                del ref_ene
+                ene.eliminar = True
+                # ref_ene = ene 
+                # lista_objetivo.remove(ene)
+                # del ref_ene
         # pygame.draw.rect(pantalla,"red" ,self.rect_attack)
 
     def verificar_colision_items(self, lista_items:list[Items], puntaje,jugador):

@@ -181,6 +181,14 @@ class Nivel(Form):
             elif evento.type == pygame.USEREVENT + 9:
                 if self.boss != None:
                     self.boss.boss_inmune = False
+            elif evento.type == pygame.USEREVENT +10:
+ 
+                for enemigo in self.lista_enemigos:
+                    if enemigo.eliminar:
+                        ref_en = enemigo
+                        self.lista_enemigos.remove(enemigo)
+                        del ref_en
+    
 
         self.name = name
         if self.game_over:
@@ -278,7 +286,7 @@ class Nivel(Form):
                 if bullet.rectangulos["principal"].colliderect(self.boss.rectangulos["principal"]):
                     if self.boss.boss_inmune == False:
                         self.boss.boss_inmune = True
-                        self.boss.health -= 1
+                        self.boss.health -= 3
                         bullet.eliminar = True
                         pygame.time.set_timer(pygame.USEREVENT + 9, 1000, 1)
 

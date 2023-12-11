@@ -101,9 +101,9 @@ class Boss(Enemigo):
         rect_bajo = pygame.Rect(0, 640, 1600, 300)
 
         
-        pygame.draw.rect(pantalla,"blue",rect_arriba,3)
-        pygame.draw.rect(pantalla,"blue",rect_medio,3)
-        pygame.draw.rect(pantalla,"blue",rect_bajo,3)
+        # pygame.draw.rect(pantalla,"blue",rect_arriba,3)
+        # pygame.draw.rect(pantalla,"blue",rect_medio,3)
+        # pygame.draw.rect(pantalla,"blue",rect_bajo,3)
 
         for rect in self.lista_rect:
             if rect.colliderect(jugador.rectangulos["principal"]) and self.dash_attack_wait:

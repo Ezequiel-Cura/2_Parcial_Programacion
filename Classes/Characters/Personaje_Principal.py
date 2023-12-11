@@ -19,7 +19,7 @@ class PersonajePrincipal(Personaje):
 
     def verificar_colision_enemigo(self, lista_enemigos):
         for enemigo in lista_enemigos:
-            if self.inmune == False:
+            if self.inmune == False and enemigo.eliminar == False:
                 if self.rectangulos["principal"].colliderect(enemigo.rectangulos["principal"]):
                     pygame.time.set_timer(pygame.USEREVENT + 4, 3000, 1)
                     self.inmune = True

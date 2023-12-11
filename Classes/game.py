@@ -12,7 +12,7 @@ class Game(Config):
         self.form = FormPrincipal(self.SCREEN,
                                500,100,
                                1000,500,
-                               "gray",
+                               None,
                                "black",
                                2,
                                True

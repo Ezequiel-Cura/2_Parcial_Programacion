@@ -56,7 +56,11 @@ class FormPrincipal(Form):
         
 
     def render(self):
-        self._slave.fill(self._color_background)
+        if self._color_background != None:
+            self._slave.fill(self._color_background)
+        else:    
+            pygame.draw.rect(self._slave,"green",(0,0,0,0))
+        
 
     def update(self, lista_eventos):
         if self.verificar_dialog_result():

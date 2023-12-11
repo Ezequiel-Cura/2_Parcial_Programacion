@@ -102,10 +102,17 @@ goblin_attack = [
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\6.png"),
     pygame.image.load(r"Assets\Images\Enemys\Goblin\Attack\7.png"),
 ]
-
+goblin_death = [
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Death\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Death\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Death\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Goblin\Death\3.png"),
+    
+]
 dicc_animations_goblin = {
     "run": goblin_move,
-    "attack": goblin_attack
+    "attack": goblin_attack,
+    "death": goblin_death
 }
 goblin_animations = [goblin_move,goblin_attack]
 
@@ -127,9 +134,17 @@ skeleton_attack = [
     pygame.image.load(r"Assets\Images\Enemys\Skeleton\Attack\7.png"),
 ]
 
+skeleton_death = [
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Death\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Death\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Death\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Skeleton\Death\3.png"),
+]
+
 dicc_animations_skeleton = {
     "run": skeleton_move,
-    "attack": skeleton_attack
+    "attack": skeleton_attack,
+    "death": skeleton_death
 }
 
 skeleton_animation = [skeleton_move, skeleton_attack]
@@ -162,9 +177,21 @@ necro_revive = [
     pygame.image.load(r"Assets\Images\Enemys\Necromancer\Resurection\12.png"),
 ]
 
+necro_death = [
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\0.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\1.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\2.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\3.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\4.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\5.png"),
+    pygame.image.load(r"Assets\Images\Enemys\Necromancer\Death\6.png"),
+]
+
+
 dicc_animations_necro = {
     "run": necro_walk,
     "revive": necro_revive,
+    "death": necro_death
     
 }
 

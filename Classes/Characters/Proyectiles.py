@@ -3,6 +3,7 @@ from Classes.Characters.Items import Items
 from configuraciones import *
 from Classes.Characters.Entidades import Entidades_Juego
 from Classes.Characters.Plataforma import Plataforma
+from Classes.Characters.Personaje_enemigo import Enemigo
 
 class Proyectiles(Items):
     def __init__(self, tamaño, posicion, direccion,animacion, angulo = 0):
@@ -82,14 +83,15 @@ class Proyectiles(Items):
             self.eliminar = True
 
     
-    def verificar_colision_enemigos(self, lista_enemigos:list):
+    def verificar_colision_enemigos(self, lista_enemigos:list[Enemigo]):
        
         for en in lista_enemigos:
             if self.rectangulos["principal"].colliderect(en.rectangulos["principal"]):
                 self.eliminar = True
-                ref_en = en
-                lista_enemigos.remove(en)
-                del ref_en
+                en.eliminar = True
+                # ref_en = en
+                # lista_enemigos.remove(en)
+                # del ref_en
     
     
 
